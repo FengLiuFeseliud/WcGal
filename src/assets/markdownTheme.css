@@ -1,0 +1,103 @@
+:root {
+    --background-blockquote-strip-color: rgb(191, 191, 191);
+    --background-code-block-color: rgb(240, 251, 255);
+    --hljs-value-color: rgb(149, 213, 52);
+    --code-named-fence-filenam: rgb(213, 240, 251);
+}
+
+.markdown * {
+    color: var(--font-color);
+}
+
+.markdown h1 {
+    color: var(--font-color-2);
+}
+
+.markdown h2 {
+    color: var(--font-color-2);
+}
+
+.markdown h3 {
+    color: var(--font-color-2);
+}
+
+.markdown h4 {
+    color: var(--font-color-2);
+}
+
+.markdown h5 {
+    color: var(--font-color-2);
+}
+
+.markdown h6 {
+    color: var(--font-color-2);
+}
+
+.markdown code {
+    padding: 0px 0.5rem;
+    border-radius: 5px;
+    background-color: var(--background-code-block-color);
+}
+
+.markdown blockquote {
+    color: var(--background-blockquote-strip-color);
+    border-left: 0.5rem solid;
+    padding-left: 0.5rem;
+}
+
+.markdown pre {
+    margin: 1rem;
+    padding: 1rem;
+    background-color: var(--background-code-block-color);
+    border-radius: 10px;
+    box-shadow: 0.6rem 0.6rem 0.8rem rgb(80, 80, 80);
+}
+
+.markdown pre code {
+    font-size: 1rem;
+    padding: 0;
+}
+
+.named-fence-filename {
+    float: right;
+    width: fit-content;
+    padding: 0.1rem 0.5rem;
+    margin-top: -1rem;
+
+    font-weight: bold;
+    border-radius: 0.2rem;
+    background-color: var(--code-named-fence-filenam);
+}
+
+.hljs-string {
+    color: var(--hljs-value-code);
+}
+
+.hljs-number {
+    color: var(--hljs-value-code);
+}
+
+.hljs-literal {
+    color: rgb(194, 194, 1);
+}
+
+.hljs-keyword {
+    color: rgb(83, 157, 186);
+}
+
+.hljs-property {
+    color: pink;
+}
+
+.hljs-built_in {
+    color: goldenrod;
+}
+
+.class_ {
+    color: rgb(220, 128, 143)
+}
+
+.markdown ruby > rt {
+    margin: 0.1rem;
+    color: var(--link-hover-font-color);
+}

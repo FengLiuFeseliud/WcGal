@@ -1,0 +1,77 @@
+@font-face {
+  font-family: "iconfont"; /* Project id  */
+  src: url('iconfont.ttf?t=1727595035423') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-yooxi:before {
+  content: "\e604";
+}
+
+.icon-upload:before {
+  content: "\e674";
+}
+
+.icon-img:before {
+  content: "\e699";
+}
+
+.icon-paixujiangxu:before {
+  content: "\e63a";
+}
+
+.icon-paixushengxu:before {
+  content: "\e63b";
+}
+
+.icon-code:before {
+  content: "\e7fc";
+}
+
+.icon-sever-fill:before {
+  content: "\e85f";
+}
+
+.icon-github-fill:before {
+  content: "\e885";
+}
+
+.icon-Vue:before {
+  content: "\e799";
+}
+
+.icon-uiwindow_split_x:before {
+  content: "\e8b0";
+}
+
+.icon-x:before {
+  content: "\e67d";
+}
+
+.icon-save-lined:before {
+  content: "\e83d";
+}
+
+.icon-a-Searchbar_unselected:before {
+  content: "\e62b";
+}
+
+.icon-bilibili:before {
+  content: "\e71d";
+}
+
+.icon-ui_handbook:before {
+  content: "\e82d";
+}
+
+.icon-bilibili-fill:before {
+  content: "\ea95";
+}
+

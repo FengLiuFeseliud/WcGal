@@ -1,0 +1,52 @@
+* {
+    margin: 0px;
+    padding: 0px;
+
+    font-family: sans-serif, monospace;
+}
+
+button {
+    border: none;
+}
+
+
+:root {
+    --div-background-color: #fff;
+    --cover-page-background-color: rgba(234, 234, 234, 0.5);
+    --font-color: skyblue;
+    --font-color-2: rgb(55, 136, 168);
+    --link-hover-font-color: pink;
+    --input-focus-font-color: pink;
+
+    /** -markdown editor **/
+    --markdown-editor-tools-bar-color: rgba(135, 207, 235, 0.8);
+    --markdown-editor-tool-button-color: rgba(135, 207, 235, 0);
+    --markdown-editor-tool-button-hover-color: rgba(135, 207, 235, 1);
+    --markdown-editor-line-color: rgba(135, 207, 235, 0.8);
+    --markdown-editor-line-font-color: #fff;
+
+    /** markdown **/
+    --markdown-line-color: aliceblue;
+    --markdown-line-font-color: #fff;
+    --markdown-editor-color: var(--cover-page-background-color);
+    --markdown-editor-input-color: var(--cover-page-background-color);
+}
+
+html {
+    overflow-x: hidden;
+}
+
+.background {
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url("https://raw.githubusercontent.com/FengLiuFeseliud/pycqBot/refs/heads/master/docs/img/bg.png");
+}
+
+a {
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
+}

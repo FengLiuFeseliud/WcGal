@@ -1,0 +1,64 @@
+<script lang="ts" setup>
+    import type { Tag } from '@/request/ArticleRequest';
+    
+
+    var { tags } = defineProps<{tags: Tag[]}>()
+    const emits = defineEmits(['onTag'])
+
+    const [ checkedTags ] = defineModel<Tag[]>({
+        default: []
+    })
+
+    function onTag(tag: Tag){
+        emits("onTag", tag)
+        
+        var flag = false
+        checkedTags.value.forEach(checkedTag => {
+            if(checkedTag.tagId == tag.tagId){
+                flag = true
+            }
+        })
+
+        if(!flag){
+            checkedTags.value.push(tag)
+        }
+    }
+</script>
+    
+<template>
+    <div class="tag-bar" v-if="tags.length">
+        <a class="tag" v-for="tag in tags" :key="tag.tagId" @click="onTag(tag)">
+            {{ tag.tagName }}<span>{{ tag.tagCount }}</span>
+            <slot></slot>
+        </a>
+    </div>
+</template>
+
+<style scoped>
+    .tag {
+        padding: 2px 8px;
+        display: inline-block;
+        margin-top: 10px;
+        margin-right: 6px;
+
+        font-size: 80%;
+
+        box-shadow: 0.5px 0.5px 1px 1px rgb(208, 207, 207);
+        border-radius: 3px;
+        color: var(--font-color);
+
+        transition: all 0.25s;
+    }
+
+    .tag > span {
+        font-size: 60%;
+        color: var(--link-hover-font-color);
+    }
+    
+    .tag:hover {
+        position: relative;
+        font-size: 125%;
+        color: var(--link-hover-font-color);
+    }
+
+</style>
