@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1727595035423') format('truetype');
+  src: url('iconfont.ttf?t=1727951085751') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +9,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-i-info:before {
+  content: "\e61a";
 }
 
 .icon-yooxi:before {
@@ -31,7 +35,19 @@
   content: "\e63b";
 }
 
+.icon-wangjimima:before {
+  content: "\e67d";
+}
+
+.icon-warming:before {
+  content: "\e689";
+}
+
 .icon-code:before {
+  content: "\e651";
+}
+
+.icon-code1:before {
   content: "\e7fc";
 }
 
@@ -43,16 +59,56 @@
   content: "\e885";
 }
 
+.icon-password-not-view:before {
+  content: "\e723";
+}
+
+.icon-zhuye:before {
+  content: "\e619";
+}
+
 .icon-Vue:before {
   content: "\e799";
+}
+
+.icon-password_line:before {
+  content: "\e6cc";
+}
+
+.icon-register:before {
+  content: "\e613";
 }
 
 .icon-uiwindow_split_x:before {
   content: "\e8b0";
 }
 
+.icon-password-visible:before {
+  content: "\e609";
+}
+
+.icon-yab-ctrl:before {
+  content: "\e970";
+}
+
+.icon-email:before {
+  content: "\e66f";
+}
+
+.icon-error:before {
+  content: "\e670";
+}
+
 .icon-x:before {
-  content: "\e67d";
+  content: "\e67e";
+}
+
+.icon-sousuo:before {
+  content: "\e603";
+}
+
+.icon-nickname_default:before {
+  content: "\e636";
 }
 
 .icon-save-lined:before {
@@ -67,11 +123,23 @@
   content: "\e71d";
 }
 
+.icon-down:before {
+  content: "\e839";
+}
+
+.icon-login:before {
+  content: "\e661";
+}
+
 .icon-ui_handbook:before {
   content: "\e82d";
 }
 
 .icon-bilibili-fill:before {
   content: "\ea95";
+}
+
+.icon-send-email:before {
+  content: "\ea33";
 }
 

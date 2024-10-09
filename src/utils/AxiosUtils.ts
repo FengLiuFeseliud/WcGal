@@ -1,3 +1,4 @@
+import { Log } from "@/stores/LogStore";
 import axios from "axios";
 
 interface Response<T>{
@@ -14,19 +15,21 @@ interface PageResponse<T> extends Response<T>{
 class AxiosUilt {
     private url: string;
     public instance: axios.AxiosInstance;
+    public static api: string = "http://localhost:8080"
     
     constructor(url: string){
         this.url = url;
         this.instance = axios.create({
             baseURL: url,
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             }
         })
     }
 
     public static create(){
-        return new AxiosUilt("http://127.0.0.1:8080");
+        return new AxiosUilt(AxiosUilt.api);
     }
 
     public async post<D = any, T = any>(path: string, data?: D): Promise<Response<T> | null>{
@@ -39,6 +42,9 @@ class AxiosUilt {
             return null;
         })
 
+        if(response.code != 200){
+            Log.error(response.message)
+        }
         return response
     }
 

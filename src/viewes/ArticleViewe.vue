@@ -1,13 +1,23 @@
 <script lang="ts" setup>
     import MarkDown from '@/components/tool/MarkDown.vue';
-    import { ref } from 'vue';
+    import { ArticleRequest } from '@/request/ArticleRequest';
+    import { router } from '@/router';
+    import { Log } from '@/stores/LogStore';
 
-    const text= ref<string>("")
+    const { articleId } = defineProps<{articleId: number}>()
+    const article = await ArticleRequest.getArticle(articleId)
+    if(article.code != 200){
+        Log.error("获取文章失败... qwq")
+        setTimeout(() => {
+            router.back()
+        }, 1000)
+    }
 </script>
 
 <template>
-    <textarea v-model="text"></textarea>
-    <MarkDown :text="text"></MarkDown>
+    <div class="article">
+        <MarkDown :text="article.data.articleContent" :line="false" :show="true"></MarkDown>
+    </div>
 </template>
 
 <style scoped>

@@ -16,12 +16,6 @@
 
 <style>
     .tag-side-bar {
-        min-width: 15%;
-        max-width: 16%;
-        float: right;
-        padding: 0.5%;
-        margin-right: 2.5%;
-
         background-color: var(--cover-page-background-color);
         border-radius: 10px;
     }
@@ -29,6 +23,5 @@
     .tag {
         background-color: var(--div-background-color);
         color: var(--font-color);
-        margin-left: 0;
     }
 </style>

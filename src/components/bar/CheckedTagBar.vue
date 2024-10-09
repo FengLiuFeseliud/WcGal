@@ -23,12 +23,6 @@
 
 <style scoped>
     .tag-bar {
-        margin: auto;
-        margin-bottom: 0.8%;
-        padding: 0.5%;
-        padding-top: 0;
-        width: 24%;
-
         border-radius: 10px;
         background-color: var(--cover-page-background-color);
     }

@@ -10,12 +10,12 @@
 
 <template>
     <div id="cover-page" :style="{height: height}">
-        <div>
+        <div class="my">
             <img src="https://pbs.twimg.com/profile_images/1835535314913501184/DJ7LhgIR.jpg">
             <span>我玩 GalGame? 真的假的?</span>
         </div>
 
-        <div class="card-list" style="width: 30%; padding: 0px;" >
+        <div class="card-list" style="padding: 0;">
             <Card url="https://space.bilibili.com/34394509">
                 <i class="iconfont icon-bilibili"></i>
                 <span>BiliBilb<br><span>我的 BiliBili 主页</span></span>
@@ -54,13 +54,13 @@
         background-color: var(--cover-page-background-color);
     }
 
-    #cover-page > div {
+    #cover-page > .my {
         width: fit-content;
         margin: auto;
         padding-top: 10%;
     }
 
-    #cover-page > div > span {
+    #cover-page > .my > span {
         display: block;
 
         font-size: calc(1.5rem + 1vw);
@@ -81,22 +81,23 @@
     }
 
     .card-list{
-        width: 40%;
-        min-width: 15rem;
+        width: 32rem;
+        max-width: 79%;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin: auto;
     }
 
     .card-list > .card {
-        width: 40%;
-        min-width: 15rem;
-
-        margin: auto;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5%;
+        height: 4.3rem;
+        width: 15rem;
+        margin: 0.5rem auto;
     }
 
     .card-list > .card:hover {
-        width: 45%;
-        min-width: 16rem;
+        width: 16rem;
+        height: 4.4rem;
     }
 
     .card-list > .card > span {

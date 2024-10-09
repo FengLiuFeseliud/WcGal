@@ -1,15 +1,22 @@
 <script lang="ts" setup>
+    import { showPlaceholderList } from '@/utils/TextUtils';
     import { ref } from 'vue';
 
     const [ desc ] = defineModel<boolean>()
-
     const keyword = ref<string>()
     const emits = defineEmits<{keyword: [keyword: string]}>()
+
+    const placeholder = ref<string>("")
+    showPlaceholderList(placeholder, [
+        "从本站搜索所有文章！",
+        "使用 #[标签名] 也可以搜索标签！注意前面加空格！", 
+        "使用 @[用户名] 可以搜索用户文章！注意前面加空格！"
+    ], 200, 10)
 </script>
 
 <template>
     <div class="search-bar">
-        <input type="text" v-model="keyword">
+        <input type="text" v-model="keyword" :placeholder="placeholder">
         <button @click="keyword != undefined ? emits('keyword', keyword): null">
             <i class="iconfont icon-a-Searchbar_unselected"></i>
         </button>
@@ -20,46 +27,31 @@
 </template>
 
 <style scoped>
-    .search-bar > * {
-        border: none;
-        display: inline-block;
-
-        font-size: 2rem;
-        overflow-x: scroll;
+    .search-bar {
+        display: flex;
+        width: fit-content;
+        height: fit-content;
     }
 
-    .search-bar {
-        margin: auto;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        width: fit-content;
-        height: 60px;
-
-        border-radius: 10px;
-        overflow: hidden;
+    .search-bar > * {
+        border: none;
     }
 
     .search-bar i {
-        font-size: 30px;
+        text-align: center;
         transition: all 0.25s;
     }
 
     .search-bar > input {
-        padding: 0px;
-        width: fit-content;
-        height: 60px;
-
-        text-align: center;
-
-        border: 0px 5px 5px 5px;
+        flex: 1;
         color: var(--font-color);
+
+        outline: none;
     }
 
     .search-bar > button {
-        width: 60px;
-        height: 60px;
-
         color: var(--font-color);
+        padding: 1%;
         background-color: aliceblue;
     }
 
@@ -69,6 +61,7 @@
 
     .search-bar:hover {
         border: 5px;
+        border: 0.1rem solid var(--font-color);
     }
 
     .search-bar > input:hover {
@@ -76,7 +69,6 @@
     }
 
     .search-bar > input:focus {
-        border: none;
         color: var(--input-focus-font-color);
     }
 

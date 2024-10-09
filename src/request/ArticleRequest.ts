@@ -1,4 +1,6 @@
-import { AxiosUilt, type PageResponse } from "@/utils/AxiosUtils";
+import { useArticleStore } from "@/stores/ArticleStore";
+import { AxiosUilt, type PageResponse, type Response } from "@/utils/AxiosUtils";
+import type { User } from "./UserRequest";
 
 interface Tag{
     tagId: number
@@ -9,7 +11,7 @@ interface Tag{
 interface Article{
     articleId: number
     articleTitle: string
-    articleAuthor: string
+    articleAuthor: User
     articleContent: string
     cover: string
     tags: string
@@ -21,6 +23,10 @@ interface Article{
 class ArticleRequest{
     private static allTags: Tag[]
 
+    public static async getArticle(articleId: number): Promise<Response<Article>>{
+        return <Response<Article>><unknown>(await AxiosUilt.create().post("/galgame/" + articleId))
+    }
+
     public static async getArticles(page: number, limit: number, desc: boolean, keyword?: string): Promise<PageResponse<Article[]> | null>{
         const key = keyword == null ? "": keyword.trimEnd()
         const data = <PageResponse<Article[]>><unknown>(await AxiosUilt.create().post(key != "" ? "/galgame/search" : "/galgame/list", {
@@ -29,7 +35,25 @@ class ArticleRequest{
             limit: limit,
             desc: desc != null ? desc : false
         }))
-        return data != null ? data : null
+
+        if(data == null){
+            return null
+        }
+
+        if(keyword === undefined || keyword == ""){
+            useArticleStore().setCount(data.count)
+        }
+        return data
+    }
+
+    public static async getCount(): Promise<number> {
+        const data = await AxiosUilt.create().post("/galgame/count");
+        if(data == null){
+            return 0;
+        }
+
+        useArticleStore().setCount(data.data)
+        return data.data
     }
 
     public static async getAllTags(): Promise<Tag[]> {
@@ -39,6 +63,7 @@ class ArticleRequest{
         
         const data = await AxiosUilt.create().post("/galgame/tags/all")
         ArticleRequest.allTags = data != null ? data.data : {}
+        useArticleStore().setTags(ArticleRequest.allTags)
         return ArticleRequest.allTags
     }
 }

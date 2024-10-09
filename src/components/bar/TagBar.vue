@@ -35,10 +35,16 @@
 </template>
 
 <style scoped>
+    .tag-bar {
+        padding: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
     .tag {
         padding: 2px 8px;
         display: inline-block;
-        margin-top: 10px;
         margin-right: 6px;
 
         font-size: 80%;
@@ -56,8 +62,6 @@
     }
     
     .tag:hover {
-        position: relative;
-        font-size: 125%;
         color: var(--link-hover-font-color);
     }
 
