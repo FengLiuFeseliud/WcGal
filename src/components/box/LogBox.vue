@@ -12,10 +12,10 @@
                 <i v-if="log.level == LogType.INFO" class="iconfont icon-i-info"></i>
                 <i v-if="log.level == LogType.WARMING" class="iconfont icon-warming"></i>
                 <i v-if="log.level == LogType.ERROR" class="iconfont icon-error"></i>
-                {{ log.level }}:<br/>
+                {{ log.level.toUpperCase() }}：<br/>
                 <span>{{ log.data }}</span>
             </div>
-            <ProgressBar :run="index == 0" :className="'progress-bar-' + log.level" :second="5" @end="useStore.delLog()"></ProgressBar>
+            <ProgressBar :run="index == 0" :className="'progress-bar-' + log.level" :second="3" @end="useStore.delLog()"></ProgressBar>
         </div>
     </div>
 </template>
@@ -38,7 +38,7 @@
         margin-top: 0.35rem;
         padding: 1rem;
         height: fit-content;
-        background-color: var(--cover-page-background-color);
+        background-color: var(--div-background-color);
         
 
     }

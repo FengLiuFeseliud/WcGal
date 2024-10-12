@@ -2,7 +2,6 @@
     import { type Tag } from '@/request/ArticleRequest';
     import TagBar from './TagBar.vue';
 
-    const { tags } = defineProps<{tags: Tag[]}>()
     const [ checkedTags ] = defineModel<Tag[]>({
         default: [],
     })
@@ -16,8 +15,8 @@
 </script>
 
 <template>
-    <TagBar :tags="tags" @onTag="uncheckTag">
-        <slot><i class="iconfont icon-x"></i></slot>
+    <TagBar :tags="checkedTags" @onTag="uncheckTag">
+        <i class="iconfont icon-x"></i>
     </TagBar>
 </template>
 

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import HomeViewe from "@/viewes/HomeViewe.vue";
 
 
 const router = createRouter({
@@ -7,7 +8,7 @@ const router = createRouter({
         {
             path: "/",
             name: 'home',
-            component: () => import("@/viewes/HomeViewe.vue"),
+            component: HomeViewe,
             meta: {'title': 'WcGalGame'}
         },
 
@@ -50,7 +51,7 @@ const router = createRouter({
 
         {
             path: "/:pathMatch(.*)",
-            component: () => import("@/viewes/NotViewe.vue"),
+            component: () => HomeViewe,
         }
      ]
 })

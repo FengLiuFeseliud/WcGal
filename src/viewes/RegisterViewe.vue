@@ -55,15 +55,7 @@
         border-radius: 1rem;
         background-color: var(--cover-page-background-color);
     }
-
-    .register-box input {
-        height: 100%;
-        padding: 0 0.6rem;
-        border: none;
-
-        float: 1;
-    }
-
+    
     h2 {
         color: var(--font-color);
     }

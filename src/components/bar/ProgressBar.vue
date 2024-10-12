@@ -18,7 +18,7 @@
 
 <style scoped>
     .progress-bar {
-        animation: progress 5s linear 1 forwards;
+        animation: progress 3s linear 1 forwards;
         border-bottom: 0.3rem solid;
     }
 

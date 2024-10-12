@@ -1,4 +1,5 @@
 import { Log } from "@/stores/LogStore";
+import { useUserStore } from "@/stores/UserStore";
 import axios from "axios";
 
 interface Response<T>{
@@ -23,7 +24,8 @@ class AxiosUilt {
             baseURL: url,
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'token': useUserStore().token
             }
         })
     }
@@ -37,11 +39,7 @@ class AxiosUilt {
         .then(response => {
             return response.data
         })
-        .catch(error => {
-            console.error(error)
-            return null;
-        })
-
+        
         if(response.code != 200){
             Log.error(response.message)
         }
@@ -51,13 +49,22 @@ class AxiosUilt {
     public async upload(path: string, filesData: FileList):  Promise<Response<string[]> | null>{
         const formData = new FormData();
         Array.from(filesData).forEach((file) => {
+            Log.info("上传 " + file.name + " ...")
             formData.append("file", file);
         });
-        return await this.instance.post(path, formData, {
+        const response: Response<string[]> = await this.instance.post(path, formData, {
             headers: { "Content-Type": "multipart/form-data" }
-        }).then(response => {
+        })
+        .then(response => {
             return response.data
-        });
+        })
+        
+        if(response.code != 200){
+            Log.error(response.message)
+        } else {
+            Log.info("上传成功！")
+        }
+        return response
     }
 }
 

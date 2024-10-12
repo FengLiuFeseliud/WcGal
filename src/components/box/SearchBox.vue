@@ -14,7 +14,7 @@
     }
 
     var preCode = ""
-    window.addEventListener("keydown", key => {
+    function keyShow(key: KeyboardEvent){
         if(key.key === "Escape"){
             useStore.setSearchShow(false)
         }
@@ -24,14 +24,16 @@
         }
 
         preCode = key.key
-    })
+    }
+    
+    window.addEventListener("keydown", keyShow)
 </script>
 
 <template>
     <div class="search-box" v-show="show">
         <div class="box">
             <SearchBar v-model:model-value="useStore.desc" @keyword="onSearch" />
-            <CheckedTagBar :tags="useStore.checkedTags" v-model:model-value="useStore.checkedTags"></CheckedTagBar>
+            <CheckedTagBar v-model:model-value="useStore.checkedTags"></CheckedTagBar>
             <TagSideBar v-model:model-value="useStore.checkedTags"/>
         </div>
     </div>
@@ -59,6 +61,7 @@
         flex-direction: column;
         margin: 0 auto;
         margin-bottom: 60vh;
+        width: auto;
         padding: 1rem;
         background-color: var(--cover-page-background-color);
 
@@ -71,6 +74,11 @@
 
     .search-bar {
         width: 30vw;
+    }
+
+    .search-bar >>> label {
+        padding: 0.5rem;
+        font-size: 2rem;
     }
 
     .search-bar >>> input {

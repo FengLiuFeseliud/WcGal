@@ -1,15 +1,9 @@
 <script lang="ts" setup>
-    import { ref } from 'vue';
     import Card from './Card.vue';
-
-    var height = ref<string>(window.innerHeight + 40 + "px");
-    window.addEventListener('resize', () => {
-        height.value = window.innerHeight + 40 / window.devicePixelRatio + "px";
-    });
 </script>
 
 <template>
-    <div id="cover-page" :style="{height: height}">
+    <div id="cover-page" >
         <div class="my">
             <img src="https://pbs.twimg.com/profile_images/1835535314913501184/DJ7LhgIR.jpg">
             <span>我玩 GalGame? 真的假的?</span>
@@ -29,7 +23,7 @@
                 <span>Twitter<br><span>我的 Twitter 主页</span></span>
             </Card>
             <Card url="https://space.bilibili.com/34394509">
-                <i class="iconfont icon-code"></i>
+                <i class="iconfont icon-code1"></i>
                 <span>前端源码<br><span>本站前端源码开源</span></span>
             </Card>
             <Card url="https://space.bilibili.com/34394509">
@@ -46,7 +40,8 @@
 
 <style scoped>
     #cover-page {
-        width: 100%;
+        width: 100vw;
+        height: 100vh;
         min-height: fit-content;
         padding-bottom: 2rem;
         margin: auto;

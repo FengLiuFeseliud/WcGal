@@ -2,26 +2,28 @@
     import { ref } from 'vue';
     import MarkDown from './MarkDown.vue';
     import RadioBox from '@/components/input/RadioBox.vue';
+    import ArticleUploadBox from '../box/ArticleUploadBox.vue';
     import '@/assets/markdownTheme.css'
     import { FileRequest } from '@/request/FileRequest';
 
     enum UiType{
         EditorAndlMarkDown = "icon-uiwindow_split_x",
         fillMarkDown = "icon-ui_handbook",
-        fillEditor = "icon-code"
+        fillEditor = "icon-code1"
     }
 
     const text = ref<string>("")
     const uiType = ref<UiType>(UiType.EditorAndlMarkDown)
+    const showUpload = ref<boolean>(false)
 
-    async function upload(e: Event){
+    async function uploadImg(e: Event){
         const input = e.target as HTMLInputElement
         if(input.files == null){
             return
         }
 
         (await FileRequest.uploadImg(input.files)).forEach(url => {
-            text.value += "\n![img](" + url + " =500x300)\n"
+            text.value += "\n![img](" + FileRequest.img(url) + "?scale=0.5)\n"
         });
     }
 </script>
@@ -30,10 +32,10 @@
     <div class="markdown-editor">
         <div class="markdown-editor-tools-bar"> 
             <div class="markdown-editor-tools-bar-left">
-                <button class="button iconfont icon-upload" ></button>
+                <button class="button iconfont icon-upload" @click="showUpload = !showUpload"></button>
                 <button class="button iconfont icon-save-lined" ></button>
                 <label class="button iconfont icon-img" for="upload">
-                    <input type="file" id="upload" multiple style="opacity: 0;" accept="image/*" @change="upload">
+                    <input type="file" id="upload" style="opacity: 0;" accept="image/*" @change="uploadImg">
                 </label>
             </div>
             <div class="markdown-editor-title">
@@ -52,6 +54,8 @@
             <textarea class="markdown-editor-input" v-model="text" v-show="uiType == UiType.EditorAndlMarkDown || uiType == UiType.fillEditor" ></textarea>
             <MarkDown :text="text" :line="false" :show="uiType == UiType.EditorAndlMarkDown || uiType == UiType.fillMarkDown"></MarkDown>
         </div>
+
+        <ArticleUploadBox :show="showUpload"></ArticleUploadBox>
     </div>
 </template>
 

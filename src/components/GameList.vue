@@ -1,18 +1,20 @@
+/**
+组件 - 下滑加载文章
+*/
 <script lang="ts" setup>
-    import { ArticleRequest, type Article, type Tag } from '@/request/ArticleRequest'
+    import { ArticleRequest, type Article } from '@/request/ArticleRequest'
     import Card from './Card.vue'
     import TagBar from './bar/TagBar.vue';
-    import { ref, watch, type Ref} from 'vue';
+    import { onActivated, onDeactivated, ref, watch, type Ref} from 'vue';
     import { useArticleStore } from '@/stores/ArticleStore';
+    import { Log } from '@/stores/LogStore';
 
     const useStore = useArticleStore()
-
     var articles: Ref<Article[]> = ref([])
-
     var page: number = 0
     var pages: number = 0
-    
     var keywordData = ""
+
     async function resetList(){
         page = 0
         var fun = ArticleRequest.getArticles(page, 10, useStore.desc, keywordData);
@@ -34,11 +36,7 @@
         await resetList()
     }
 
-    watch(() => useStore.desc, async () => await resetList())
-    watch(() => useStore.search, async () => await onSearch(useStore.search))
-    watch(useStore.checkedTags, async () => await onSearch(useStore.search))
-    
-    window.addEventListener("scroll", async () => {
+    async function scrollGat() {
         if(document.documentElement.clientHeight + window.scrollY + 4 < document.documentElement.scrollHeight){
             return
         }
@@ -54,15 +52,44 @@
             return
         }
 
+        if(data.data.length == 0){
+            Log.warming("欧尼酱... 到底了啦... 不能再下面了啦...")
+        }
+
         articles.value = articles.value.concat(data.data)
         pages = data.pages
-    })
+    }
 
     function getTime(tiem: string){
         var date = new Date(Date.parse(tiem))
         return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDay()
             + " " + date.getHours() + ":" + date.getMinutes()
     }
+
+    watch(() => useStore.desc, async (desc: boolean) => {
+        if(desc){
+            Log.info("正在进行日期倒序显示文章... 等等哦~")
+        } else {
+            Log.info("正在进行日期正序显示文章... 等等哦~")
+        }
+        await resetList()
+        Log.info("重新完成排序啦！！！")
+    })
+
+    watch(() => useStore.search, async () => {
+        Log.info("正在搜索... 等等哦~")
+        await onSearch(useStore.search)
+        Log.info("搜索完成啦！！！")
+    })
+
+    watch(useStore.checkedTags, async () => {
+        Log.info("正在搜索... 等等哦~")
+        await onSearch(useStore.search)
+        Log.info("搜索完成啦！！！")
+    })
+
+    onActivated(() => window.addEventListener("scroll", scrollGat))
+    onDeactivated(() => window.removeEventListener("scroll", scrollGat))
 </script>
 
 <template>

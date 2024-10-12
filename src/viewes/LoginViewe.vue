@@ -7,7 +7,6 @@
     import { ref } from 'vue';
     import { router } from '@/router'
     import { Log } from '@/stores/LogStore';
-    import { onBeforeRouteLeave } from 'vue-router';
 
     const useStore = useUserStore()
     const email = ref<string>("")

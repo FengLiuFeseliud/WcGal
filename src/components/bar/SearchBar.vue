@@ -9,13 +9,14 @@
     const placeholder = ref<string>("")
     showPlaceholderList(placeholder, [
         "从本站搜索所有文章！",
-        "使用 #[标签名] 也可以搜索标签！注意前面加空格！", 
-        "使用 @[用户名] 可以搜索用户文章！注意前面加空格！"
+        "#[标签名] 也可以搜索标签！前面加空格！", 
+        "@[用户名] 可以搜索用户文章！前面加空格！"
     ], 200, 10)
 </script>
 
 <template>
     <div class="search-bar">
+        <label class="iconfont icon-sousuo"></label>
         <input type="text" v-model="keyword" :placeholder="placeholder">
         <button @click="keyword != undefined ? emits('keyword', keyword): null">
             <i class="iconfont icon-a-Searchbar_unselected"></i>
@@ -35,6 +36,11 @@
 
     .search-bar > * {
         border: none;
+    }
+
+    .search-bar > label {
+        color: rgb(111, 111, 111);
+        background-color: var(--div-background-color);
     }
 
     .search-bar i {
