@@ -8,6 +8,18 @@ interface Tag{
     tagCount: number
 }
 
+class TagData implements Tag {
+    tagId: number
+    tagName: string
+    tagCount: number
+
+    constructor(tagName: string){
+        this.tagId = 0
+        this.tagName = tagName
+        this.tagCount = 0
+    }
+}
+
 interface Article{
     articleId: number
     articleTitle: string
@@ -66,6 +78,20 @@ class ArticleRequest{
         useArticleStore().setTags(ArticleRequest.allTags)
         return ArticleRequest.allTags
     }
+
+    public static async upload(text: string, title: string, cover: string, tags: Tag[]){
+        const tagNames: string[] = []
+        tags.forEach(tag => {
+            tagNames.push(tag.tagName)
+        })
+        
+        return <Response<Article>><unknown>(await AxiosUilt.create().post("/galgame/add", {
+            articleTitle: title,
+            articleContent: text,
+            cover: cover,
+            tags: tagNames
+        }))
+    }
 }
 
-export {ArticleRequest, type Tag, type Article}
+export {ArticleRequest, TagData, type Tag, type Article}

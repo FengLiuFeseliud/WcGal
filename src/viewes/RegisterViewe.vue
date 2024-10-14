@@ -26,7 +26,7 @@
 </script>
 
 <template>
-    <CoverBox>
+    <CoverBox :show="true">
         <div class="register-box">
             <h2>注册 ~</h2>
             <NameInput v-model:model-value="userName"></NameInput>

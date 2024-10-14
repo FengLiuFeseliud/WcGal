@@ -56,5 +56,7 @@
 
     #top-bar a:hover {
         color: var(--link-hover-font-color);
+        background-color: var(--font-color);
     }
+
 </style>

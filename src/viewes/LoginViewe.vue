@@ -39,7 +39,7 @@
 </script>
 
 <template>
-    <CoverBox>
+    <CoverBox :show="true">
         <div class="login-box">
             <h2>登录 ~</h2>
             <EmailInput v-model:model-value="email"></EmailInput>

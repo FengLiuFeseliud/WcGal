@@ -15,9 +15,17 @@
 </script>
 
 <template>
-    <TagBar :tags="checkedTags" @onTag="uncheckTag">
-        <i class="iconfont icon-x"></i>
-    </TagBar>
+    <div class="checked-tag-bar">
+        <TagBar :tags="checkedTags" @onTag="uncheckTag">
+            <template #tag>
+                <i class="iconfont icon-x" />
+            </template>
+            
+            <template #end>
+                <slot></slot>
+            </template>
+        </TagBar>
+    </div>
 </template>
 
 <style scoped>

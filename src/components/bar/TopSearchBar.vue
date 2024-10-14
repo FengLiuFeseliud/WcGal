@@ -24,6 +24,7 @@
 
         box-shadow: 0.5rem 0.5rem 0.5rem rgb(80, 80, 80);
         transition: all 0.1s;
+        background-color: var(--button-font-color);
     }
 
     .top-search-bar:hover {

@@ -2,11 +2,11 @@
     import SearchBar from "@/components/bar/SearchBar.vue";
     import CheckedTagBar from '@/components/bar/CheckedTagBar.vue';
     import TagSideBar from "@/components/bar/TagSideBar.vue";
+    import CoverBox from "./CoverBox.vue";
     import { useArticleStore } from "@/stores/ArticleStore";
     import { router } from "@/router";
 
     const useStore = useArticleStore()
-    const { show } = defineProps<{show: boolean}>()
 
     function onSearch(data: string){
         useStore.search = data
@@ -30,21 +30,18 @@
 </script>
 
 <template>
-    <div class="search-box" v-show="show">
+    <CoverBox :show="useStore.searchShow">
         <div class="box">
             <SearchBar v-model:model-value="useStore.desc" @keyword="onSearch" />
             <CheckedTagBar v-model:model-value="useStore.checkedTags"></CheckedTagBar>
             <TagSideBar v-model:model-value="useStore.checkedTags"/>
         </div>
-    </div>
+    </CoverBox>
 </template>
 
 <style scoped>
-    .search-box {
-        display: flex;
+    .cover {
         position: fixed;
-        width: 100vw;
-        height: 100vh;
         z-index: 9;
 
         align-items: center;
@@ -61,15 +58,11 @@
         flex-direction: column;
         margin: 0 auto;
         margin-bottom: 60vh;
-        width: auto;
+        width: 30vw;
         padding: 1rem;
+        
         background-color: var(--cover-page-background-color);
-
         border-radius: 1rem;
-    }
-
-    .box >>> .tag-bar {
-        margin-top: 0;
     }
 
     .search-bar {
@@ -90,6 +83,8 @@
         font-size: 2rem;
     }
 
-    
+    .box >>> .tag {
+        margin: 0.2rem;
+    }
 
 </style>

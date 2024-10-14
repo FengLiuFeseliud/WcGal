@@ -26,11 +26,12 @@
 </script>
     
 <template>
-    <div class="tag-bar" v-if="tags.length">
+    <div class="tag-bar" >
         <a class="tag" v-for="tag in tags" :key="tag.tagId" @click="onTag(tag)">
             {{ tag.tagName }}<span>{{ tag.tagCount }}</span>
-            <slot></slot>
+            <slot name="tag"></slot>
         </a>
+        <slot name="end"></slot>
     </div>
 </template>
 

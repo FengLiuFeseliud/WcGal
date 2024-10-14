@@ -8,7 +8,7 @@
 <template>
     <label class="password-input">
         <i class="iconfont icon-password_line"></i>
-        <input :type='passwordView ? "text": "password"' v-model="password"/>
+        <input :type='passwordView ? "text": "password"' v-model="password" placeholder="用户密码" />
         <button class="password-view" @click="() => passwordView = !passwordView">
             <i :class='"iconfont " + (passwordView ? "icon-password-visible" :"icon-password-not-view")'></i>
         </button>
@@ -26,6 +26,7 @@
 
         border: none;
         font-size: 1rem;
+        background-color: var(--input-color);
     }
 
     .password-input i {
@@ -34,10 +35,11 @@
         
         text-align: center;
         font-size: 1.5rem;
-        
     }
 
     .password-input > .password-view {
         padding: 0 0.5rem;
+
+        background-color: var(--button-font-color);
     }
 </style>

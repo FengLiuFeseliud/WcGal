@@ -4,8 +4,8 @@
 
 <template>
     <label class="title-input">
-        标题
-        <input type="text" v-model="title"/>
+        <i class="iconfont icon-zujian-biaotilan"></i>
+        <input type="text" v-model="title" placeholder="标题" />
     </label>
 </template>
 
@@ -20,6 +20,7 @@
         
         border: none;
         font-size: 1rem;
+        background-color: var(--input-color);
     }
 
     .title-input i {

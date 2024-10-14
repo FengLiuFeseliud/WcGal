@@ -6,6 +6,7 @@
         default: []
     })
     const tags = await ArticleRequest.getAllTags()
+
 </script>
 
 <template>

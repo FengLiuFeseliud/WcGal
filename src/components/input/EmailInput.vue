@@ -16,9 +16,9 @@
 
 <template>
     <label class="email-input">
-        <i class="iconfont icon-email"></i><input type="text" v-model="emailName"/>
+        <i class="iconfont icon-email"></i><input type="text" v-model="emailName" placeholder="邮箱名称" />
         &nbsp;
-        <input type="text" class="email-domain" v-model="emailDomain">
+        <input type="text" class="email-domain" v-model="emailDomain" placeholder="邮箱域名" >
         <select v-model="emailDomain">
             <option value="@gmail.com">gmail.com</option>
             <option value="@proton.com">proton.com</option>
@@ -42,6 +42,7 @@
         
         border: none;
         font-size: 1rem;
+        background-color: var(--input-color);
     }
 
     .email-input i {
@@ -59,6 +60,8 @@
 
     select {
         width: 5%;
+
         border: none;
+        background-color: var(--button-font-color);
     }
 </style>

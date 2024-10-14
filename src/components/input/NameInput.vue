@@ -5,7 +5,7 @@
 <template>
     <label class="name-input">
         <i class="iconfont icon-nickname_default"></i>
-        <input type="text" v-model="userName"/>
+        <input type="text" v-model="userName" placeholder="用户名" />
     </label>
 </template>
 
@@ -20,6 +20,7 @@
         
         border: none;
         font-size: 1rem;
+        background-color: var(--input-color);
     }
 
     .name-input i {

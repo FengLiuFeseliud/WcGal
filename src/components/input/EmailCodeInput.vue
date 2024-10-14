@@ -46,7 +46,7 @@ import { Log } from '@/stores/LogStore';
 <template>
     <label class="email-code-input">
         <i class="iconfont icon-code"></i>
-        <input type="text" v-model="code"/>
+        <input type="text" v-model="code" placeholder="邮箱验证码" />
         <button class="send-email-code" @click="sendCode">
             <i class="iconfont icon-send-email">
                 <span class="send-code-cd">{{ sendCodeCdStr }}</span>
@@ -71,6 +71,8 @@ import { Log } from '@/stores/LogStore';
 
         border: none;
         font-size: 1rem;
+
+        background-color: var(--input-color);
     }
 
     .email-code-input i {
@@ -88,6 +90,8 @@ import { Log } from '@/stores/LogStore';
     .email-code-input > .send-email-code {
         width: fit-content;
         min-width: 9%;
+
+        background-color: var(--button-font-color);
     }
 
     .send-code-cd {

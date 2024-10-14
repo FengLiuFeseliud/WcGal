@@ -155,7 +155,6 @@
     .card > img {
         position: absolute;
         width: 20rem;
-        height: 10.5rem;
 
         border-radius: 10px;
         box-shadow: 1.5px 1.5px 3px 3px rgb(208, 207, 207);
@@ -164,12 +163,7 @@
 
     .card > img:hover {
         position: absolute;
-
         width: 30%;
-        max-width: none;
-        height: 34%;
-        max-height: none;
-
         z-index: 1;
     }
 

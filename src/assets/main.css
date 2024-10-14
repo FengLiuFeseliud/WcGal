@@ -3,25 +3,83 @@
     padding: 0px;
 
     font-family: sans-serif, monospace;
+    /** 删除所有的默认下划线 */
     text-decoration: none;
+    /** 取消双击选中文字 */
+    user-select:none;
 }
 
+/** 删除所有按钮的默认边框 */
 button {
     border: none;
 }
 
+/** 删除所有输入框的默认边框  */
+input {
+    border: none;
+    outline: none;
+}
 
+/** 设置默认手势 */
+a {
+    cursor: pointer;
+}
+
+/** 设置默认手势 */
+button {
+    cursor: pointer;
+}
+
+/** 删除网站纵向滚动条 */
+html {
+    overflow-x: hidden;
+}
+
+/** 背景图片 */
+.background {
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url("https://raw.githubusercontent.com/FengLiuFeseliud/pycqBot/refs/heads/master/docs/img/bg.png");
+}
+
+#app {
+    width: 100vw;
+    height: 100vh;
+    min-height: fit-content;
+    
+    background-color: var(--app-background-color);
+}
+
+/** 亮色主题 */
 :root {
+    /** */
+    --app-background-color: rgba(255, 255, 255, 0.5);
+    /** 盒子背景颜色 */
     --div-background-color: #fff;
+    /** 半透明盒子颜色 */
     --cover-page-background-color: rgba(234, 234, 234, 0.5);
+    /** 深色半透明盒子颜色 */
     --cover-page-background-color-deep: rgba(135, 206, 235, 0.5);
+    /** 字体颜色 */
     --font-color: skyblue;
+    /** 深色字体颜色 */
     --font-color-2: rgb(55, 136, 168);
+    /** 按钮颜色 */
+    --button-font-color: #f1f1f1;
+    /** 深色按钮颜色 */
     --deep-button-font-color: #fff;
-    --link-hover-font-color: pink;
+    /** 输入框颜色 */
+    --input-color: #fff;
+    /** 输入框字体颜色 */
     --input-focus-font-color: pink;
+     /** 可点击字体颜色 */
+    --link-hover-font-color: pink;
+    /** info 日志颜色 */
     --info-color: skyblue;
+     /** warming 日志颜色 */
     --warming-color: #d9d900;
+     /** error 日志颜色 */
     --error-color: #d50000;
 
     /** -markdown editor **/
@@ -36,23 +94,4 @@ button {
     --markdown-line-font-color: #fff;
     --markdown-editor-color: var(--cover-page-background-color);
     --markdown-editor-input-color: var(--cover-page-background-color);
-}
-
-html {
-    overflow-x: hidden;
-}
-
-.background {
-    background-position: center;
-    background-attachment: fixed;
-    background-size: cover;
-    background-image: url("https://raw.githubusercontent.com/FengLiuFeseliud/pycqBot/refs/heads/master/docs/img/bg.png");
-}
-
-a {
-    cursor: pointer;
-}
-
-button {
-    cursor: pointer;
 }

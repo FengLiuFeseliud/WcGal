@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-
+    const { show = true } = defineProps<{show: boolean}>()
 </script>
 
 <template>
-    <div class="cover">
+    <div class="cover" v-show="show">
         <slot></slot>
     </div>
 </template>

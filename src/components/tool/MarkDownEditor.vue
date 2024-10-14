@@ -35,7 +35,7 @@
                 <button class="button iconfont icon-upload" @click="showUpload = !showUpload"></button>
                 <button class="button iconfont icon-save-lined" ></button>
                 <label class="button iconfont icon-img" for="upload">
-                    <input type="file" id="upload" style="opacity: 0;" accept="image/*" @change="uploadImg">
+                    <input type="file" id="upload" accept="image/*" @change="uploadImg">
                 </label>
             </div>
             <div class="markdown-editor-title">
@@ -55,7 +55,7 @@
             <MarkDown :text="text" :line="false" :show="uiType == UiType.EditorAndlMarkDown || uiType == UiType.fillMarkDown"></MarkDown>
         </div>
 
-        <ArticleUploadBox :show="showUpload"></ArticleUploadBox>
+        <ArticleUploadBox v-model:text="text" v-model:show="showUpload"></ArticleUploadBox>
     </div>
 </template>
 
@@ -101,6 +101,10 @@
     .markdown-editor-tools-bar >>> .button:hover {
         color: var(--link-hover-font-color);
         background-color: var(--markdown-editor-tool-button-hover-color);
+    }
+
+    .icon-img > input {
+        display: none;
     }
 
     .markdown-editor-title {
