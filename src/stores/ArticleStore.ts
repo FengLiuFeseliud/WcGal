@@ -1,9 +1,10 @@
-import type { Tag } from "@/request/ArticleRequest";
+import type { Article, Tag } from "@/request/ArticleRequest";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
 
 const useArticleStore = defineStore("article", () => {
+    const lookArticle = ref<Article>()
     const search = ref<string>("")
     const desc = ref<boolean>(true)
     const checkedTags = ref<Tag[]>([])
@@ -24,6 +25,7 @@ const useArticleStore = defineStore("article", () => {
     }
 
     return {
+        lookArticle,
         search,
         desc,
         checkedTags,

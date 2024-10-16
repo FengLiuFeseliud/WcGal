@@ -47,11 +47,8 @@ const useLogStore = defineStore("log", () => {
         logs.value.push(log)
     }
 
-    function delLog(){
-        const logArr = logs.value
-        logArr.shift()
-        
-        logs.value = logArr
+    function delLog(index: number){
+        logs.value.splice(index, 1)
     }
 
     return {

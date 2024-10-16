@@ -26,6 +26,13 @@ const router = createRouter({
         },
 
         {
+            path: "/user/:userId",
+            name: "user",
+            component: () => import('@/viewes/UserViewe.vue'),
+            props: true
+        },
+
+        {
             path: "/login",
             name: "login",
             component: () => import('@/viewes/LoginViewe.vue')
@@ -40,13 +47,20 @@ const router = createRouter({
         {
             path: "/password",
             name: "password",
-            component: () => import('@/viewes/ResetPassword.vue')
+            component: () => import('@/viewes/ResetPasswordViewe.vue')
         },
 
         {
             path: "/test",
             name: "test",
             component: () => import('@/test.vue')
+        },
+
+        {
+            path: "/upload/:articleId",
+            name: "upload",
+            component: () => import('@/viewes/UploadViewe.vue'),
+            props: true
         },
 
         {

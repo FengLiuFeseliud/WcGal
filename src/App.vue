@@ -1,27 +1,39 @@
 <script setup lang="ts">
+    import FooterBar from "./components/bar/FooterBar.vue";
     import TopBar from "./components/bar/TopBar.vue"
     import LogBox from "./components/box/LogBox.vue";
     import SearchBox from '@/components/box/SearchBox.vue';
+    import ToTopButton from "./components/button/ToTopButton.vue";
 </script>
 
 <template>
     <TopBar/>
+    
+    <div id="top"></div>
+    <div class="page">
+        <Suspense>
+            <SearchBox />
+        </Suspense>
 
-    <Suspense>
-        <SearchBox />
-    </Suspense>
+        <Suspense>
+            <router-view v-slot="{ Component }">
+                <keep-alive>
+                    <component :is="Component" />
+                </keep-alive>
+            </router-view>
+        </Suspense>
+    </div>
+    <div id="bottom"></div>
 
-    <Suspense>
-        <router-view v-slot="{ Component }">
-            <keep-alive>
-                <component :is="Component" />
-            </keep-alive>
-        </router-view>
-    </Suspense>
+    <ToTopButton></ToTopButton>
+    <FooterBar></FooterBar>
     <LogBox></LogBox>
 </template>
 
 
-<style>
-    
+<style scoped>
+    .page {
+        width: 100vw;
+        height: fit-content;
+    }
 </style>

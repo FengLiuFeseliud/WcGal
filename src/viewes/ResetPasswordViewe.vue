@@ -24,7 +24,7 @@
 </script>
 
 <template>
-    <CoverBox>
+    <CoverBox :show="true">
         <div class="register-box">
             <h2>更改密码 ~</h2>
             <EmailInput v-model:model-value="email"></EmailInput>

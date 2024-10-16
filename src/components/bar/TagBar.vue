@@ -50,7 +50,7 @@
 
         font-size: 80%;
 
-        box-shadow: 0.5px 0.5px 1px 1px rgb(208, 207, 207);
+        box-shadow: 0.5px 0.5px 1px 1px var(--shadow-color);
         border-radius: 3px;
         color: var(--font-color);
 

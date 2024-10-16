@@ -30,6 +30,10 @@ interface Article{
     tagsData: Tag[]
     createTime: string
     updateTime: string
+    views: number
+    likes: number
+    favorites: number
+    comments: number
 }
 
 class ArticleRequest{
@@ -79,13 +83,14 @@ class ArticleRequest{
         return ArticleRequest.allTags
     }
 
-    public static async upload(text: string, title: string, cover: string, tags: Tag[]){
+    public static async upload(articleId: number, text: string, title: string, cover: string, tags: Tag[], update: boolean){
         const tagNames: string[] = []
         tags.forEach(tag => {
             tagNames.push(tag.tagName)
         })
         
-        return <Response<Article>><unknown>(await AxiosUilt.create().post("/galgame/add", {
+        return <Response<Article>><unknown>(await AxiosUilt.create().post("/galgame/" + (update ? "add": "update"), {
+            articleId: articleId,
             articleTitle: title,
             articleContent: text,
             cover: cover,

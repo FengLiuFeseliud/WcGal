@@ -7,7 +7,7 @@
 
 <template>
     <div class="log-box">
-        <div v-for="(log, index) in useStore.getLogs().value" :key="() => { return index }">
+        <div v-for="(log, index) in useStore.getLogs().value" :key="log.data">
             <div :class="'log ' + log.level">
                 <i v-if="log.level == LogType.INFO" class="iconfont icon-i-info"></i>
                 <i v-if="log.level == LogType.WARMING" class="iconfont icon-warming"></i>
@@ -15,7 +15,7 @@
                 {{ log.level.toUpperCase() }}：<br/>
                 <span>{{ log.data }}</span>
             </div>
-            <ProgressBar :run="index == 0" :className="'progress-bar-' + log.level" :second="3" @end="useStore.delLog()"></ProgressBar>
+            <ProgressBar :run="true" :className="'progress-bar-' + log.level" :second="3" @end="() => useStore.delLog(index)"></ProgressBar>
         </div>
     </div>
 </template>

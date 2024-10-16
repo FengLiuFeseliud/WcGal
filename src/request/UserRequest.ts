@@ -1,3 +1,4 @@
+import { Log } from "@/stores/LogStore";
 import { useUserStore } from "@/stores/UserStore";
 import { AxiosUilt, type Response } from "@/utils/AxiosUtils";
 
@@ -15,8 +16,22 @@ interface User {
 
 class UserRequest {
 
-    public static get(){
-        // AxiosUilt.create().post("")
+    public static async info(): Promise<void>{
+        if(useUserStore().token == "null"){
+            return
+        }
+
+        const data = <Response<User>><unknown>(await AxiosUilt.create().post("/user/info"))
+        if(data.code == 401){
+            Log.error("登录过期！！！")
+            localStorage.removeItem("token")
+            return
+        }
+        useUserStore().setUser(data.data)
+    }
+
+    public static async get(userId: number): Promise<Response<User>>{
+        return <Response<User>><unknown>(await AxiosUilt.create().post("/user/" + userId))
     }
     
     public static async sendEmailCode(email: string): Promise<boolean>{

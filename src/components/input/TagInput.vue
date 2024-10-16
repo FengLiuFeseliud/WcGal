@@ -29,13 +29,19 @@
         checkedTags.value.push(new TagData(tagName.value))
         tagName.value = undefined
     }
+
+    function delTag(){
+        checkedTags.value.pop()
+    }
 </script>
 
 <template>
     <div class="tag-input">
         <label class="input-box">
             <CheckedTagBar v-model:model-value="checkedTags">
-                <input type="text" v-model="tagName" @keyup.enter="inputTag" placeholder="输入标签名回车添加标签">
+                <input type="text" v-model="tagName" placeholder="输入标签名回车添加标签"
+                    @keyup.enter="inputTag"
+                    @keyup.backspace="delTag">
             </CheckedTagBar>
         </label>
         <TagSideBar v-model:model-value="checkedTags"/>

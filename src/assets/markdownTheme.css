@@ -1,10 +1,3 @@
-:root {
-    --background-blockquote-strip-color: rgb(191, 191, 191);
-    --background-code-block-color: rgb(240, 251, 255);
-    --hljs-value-color: rgb(149, 213, 52);
-    --code-named-fence-filenam: rgb(213, 240, 251);
-}
-
 .markdown * {
     color: var(--font-color);
 }
@@ -50,7 +43,7 @@
     padding: 1rem;
     background-color: var(--background-code-block-color);
     border-radius: 10px;
-    box-shadow: 0.6rem 0.6rem 0.8rem rgb(80, 80, 80);
+    box-shadow: 0.6rem 0.6rem 0.8rem var(--shadow-color);
 }
 
 .markdown pre code {
@@ -100,4 +93,8 @@
 .markdown ruby > rt {
     margin: 0.1rem;
     color: var(--link-hover-font-color);
+}
+
+.markdown > .table-of-contents ol {
+    padding-left: 1rem;
 }

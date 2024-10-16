@@ -2,8 +2,6 @@
     import { ref } from 'vue';
     import MarkDown from './MarkDown.vue';
     import RadioBox from '@/components/input/RadioBox.vue';
-    import ArticleUploadBox from '../box/ArticleUploadBox.vue';
-    import '@/assets/markdownTheme.css'
     import { FileRequest } from '@/request/FileRequest';
 
     enum UiType{
@@ -12,9 +10,11 @@
         fillEditor = "icon-code1"
     }
 
-    const text = ref<string>("")
+    const text = defineModel<string>("text", {
+        default: ""
+    })
+    const showUpload = defineModel<boolean>("showUpload")
     const uiType = ref<UiType>(UiType.EditorAndlMarkDown)
-    const showUpload = ref<boolean>(false)
 
     async function uploadImg(e: Event){
         const input = e.target as HTMLInputElement
@@ -42,6 +42,7 @@
                 <h3>Web MarkDown Editor</h3>
             </div>
             <div class="markdown-editor-tools-bar-rigth">
+                <!-- <button class="button iconfont icon-hanghao"></button> -->
                 <RadioBox name="ui" :checked="0" v-model:modelValue="uiType"
                     :radioTypes="[UiType.EditorAndlMarkDown, UiType.fillMarkDown, UiType.fillEditor]"></RadioBox>
             </div>
@@ -49,13 +50,11 @@
 
         <div class="markdown-editor-area">
             <div class="markdown-editor-line" v-show="uiType == UiType.EditorAndlMarkDown || uiType == UiType.fillEditor"> 
-                <span class="markdown-line-span" v-for="(item, index) in text.split('\n')" :key="index"></span>
+                <span class="markdown-line-span" v-for="(index) in text.split('\n')" :key="index"></span>
             </div>
             <textarea class="markdown-editor-input" v-model="text" v-show="uiType == UiType.EditorAndlMarkDown || uiType == UiType.fillEditor" ></textarea>
             <MarkDown :text="text" :line="false" :show="uiType == UiType.EditorAndlMarkDown || uiType == UiType.fillMarkDown"></MarkDown>
         </div>
-
-        <ArticleUploadBox v-model:text="text" v-model:show="showUpload"></ArticleUploadBox>
     </div>
 </template>
 
@@ -164,6 +163,7 @@
 
         font-size: 1rem;
         line-height: 1.3;
+        color: var(--markdown-editor-input-font-color);
         background-color: var(--markdown-editor-color);
     }
 

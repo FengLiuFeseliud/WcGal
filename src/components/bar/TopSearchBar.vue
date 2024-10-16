@@ -22,7 +22,7 @@
 
         border-radius: 1rem;
 
-        box-shadow: 0.5rem 0.5rem 0.5rem rgb(80, 80, 80);
+        box-shadow: 0.5rem 0.5rem 0.5rem var(--shadow-color);
         transition: all 0.1s;
         background-color: var(--button-font-color);
     }

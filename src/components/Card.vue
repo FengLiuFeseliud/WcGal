@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { router } from '@/Router';
+    import { router } from '@/router';
 
     const props = defineProps({url: String, routerPath: String})
 

@@ -1,6 +1,8 @@
 @font-face {
-  font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1728855487910') format('truetype');
+  font-family: "iconfont"; /* Project id 4713892 */
+  src: url('iconfont.woff2?t=1729112631434') format('woff2'),
+       url('iconfont.woff?t=1729112631434') format('woff'),
+       url('iconfont.ttf?t=1729112631434') format('truetype');
 }
 
 .iconfont {
@@ -9,6 +11,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-zititubiao2you:before {
+  content: "\e6ff";
+}
+
+.icon-zititubiao2zuo:before {
+  content: "\e709";
+}
+
+.icon-xiangshang:before {
+  content: "\e76e";
+}
+
+.icon-xiangxia:before {
+  content: "\e76f";
 }
 
 .icon-i-info:before {
@@ -23,6 +41,10 @@
   content: "\e674";
 }
 
+.icon-likes:before {
+  content: "\e602";
+}
+
 .icon-img:before {
   content: "\e699";
 }
@@ -33,6 +55,10 @@
 
 .icon-paixushengxu:before {
   content: "\e63b";
+}
+
+.icon-bianji:before {
+  content: "\e63c";
 }
 
 .icon-wangjimima:before {
@@ -87,6 +113,10 @@
   content: "\e613";
 }
 
+.icon-likes1:before {
+  content: "\e641";
+}
+
 .icon-uiwindow_split_x:before {
   content: "\e8b0";
 }
@@ -95,12 +125,24 @@
   content: "\e609";
 }
 
+.icon-e-date-upload:before {
+  content: "\e683";
+}
+
 .icon-zujian-biaotilan:before {
   content: "\e6dc";
 }
 
+.icon-views:before {
+  content: "\e655";
+}
+
 .icon-yab-ctrl:before {
   content: "\e970";
+}
+
+.icon-back:before {
+  content: "\e666";
 }
 
 .icon-email:before {
@@ -115,12 +157,20 @@
   content: "\e67e";
 }
 
+.icon-hanghao:before {
+  content: "\e6ca";
+}
+
 .icon-sousuo:before {
   content: "\e603";
 }
 
 .icon-nickname_default:before {
   content: "\e636";
+}
+
+.icon-theme:before {
+  content: "\e600";
 }
 
 .icon-save-lined:before {
@@ -135,12 +185,32 @@
   content: "\e71d";
 }
 
+.icon-likes2:before {
+  content: "\e867";
+}
+
+.icon-update:before {
+  content: "\eab0";
+}
+
 .icon-anse:before {
   content: "\e74c";
 }
 
-.icon-down:before {
+.icon-message-comments:before {
+  content: "\e82e";
+}
+
+.icon-favorites-fill:before {
   content: "\e839";
+}
+
+.icon-favorites:before {
+  content: "\e83a";
+}
+
+.icon-down:before {
+  content: "\e83b";
 }
 
 .icon-login:before {

@@ -10,7 +10,10 @@
     import { ins } from "@mdit/plugin-ins";
     import { imgSize } from "@mdit/plugin-img-size";
     import { full as emoji } from 'markdown-it-emoji';
+    import markdownItTocDoneRight from "markdown-it-toc-done-right";
+    import anchor from "markdown-it-anchor";
     import twemoji from 'twemoji';
+    import '@/assets/markdownTheme.css';
     
     const md = markdownit()
         .use(highlightjs, {
@@ -25,6 +28,8 @@
         .use(emoji)
         .use(imgSize)
         .use(ruby)
+        .use(markdownItTocDoneRight)
+        .use(anchor)
 
     md.renderer.rules.emoji = function(token, idx) {
         return twemoji.parse(token[idx].content);

@@ -3,18 +3,26 @@
     import TagInput from '../input/TagInput.vue';
     import CoverBox from './CoverBox.vue';
     import ImgInput from '../input/ImgInput.vue';
-    import { ref } from 'vue';
-    import { ArticleRequest, type Tag } from '@/request/ArticleRequest';
+    import { ArticleRequest, type Article, type Tag } from '@/request/ArticleRequest';
     import { Log } from '@/stores/LogStore';
+    import { ref, watch } from 'vue';
 
     const [ show ] = defineModel<boolean>("show", {
         required: true
     })
     const [ text ] = defineModel<string>("text")
-
+    const article = defineModel<Article | undefined>("article")
     const title = ref<string>()
-    const imgUrl = ref<string>()
-    const checkedTags = ref<Tag[]>([])
+    const cover = ref<string>()
+    const tags = ref<Tag[]>([])
+
+    function reset(){
+        title.value = undefined
+        cover.value = undefined
+        tags.value = []
+        text.value = undefined
+        show.value = false
+    }
 
     async function uploadArticle() {
         if(title.value === undefined){
@@ -22,7 +30,7 @@
             return
         }
 
-        if(imgUrl.value === undefined){
+        if(cover.value === undefined){
             Log.error("封面不填是留给我填么？")
             return
         }
@@ -32,23 +40,42 @@
             return
         }
 
-        const article = await ArticleRequest.upload(text.value, title.value, imgUrl.value, checkedTags.value)
-        if(article.data != null){
-            Log.info("上传文章成功！")
+        Log.info("正在上传文章中...")
+        const articleData = await ArticleRequest.upload(article.value == undefined ? 0: article.value.articleId,
+            text.value, title.value, cover.value, tags.value, article.value == undefined)
+        if(articleData.data != null){
+            Log.info(getApiName() + "文章成功！")
+            reset()
         }
     }
+
+    function getApiName(): string{
+        return article.value === undefined ? "上传": "编辑"
+    }
+
+    watch(article, () => {
+        if(article.value === undefined){
+            reset()
+            return
+        }
+
+        title.value = article.value.articleTitle
+        cover.value = article.value.cover
+        tags.value = article.value.tagsData
+        text.value = article.value.articleContent
+    })
 </script>
 
 <template>
     <CoverBox :show="show">
         <div class="box">
-            <h2>上传文章 ~</h2>
+            <h2>{{ getApiName() }}文章 ~</h2>
             <TitleInput v-model:model-value="title"></TitleInput>
-            <ImgInput v-model:model-value="imgUrl"></ImgInput>
-            <TagInput v-model:model-value="checkedTags"></TagInput>
+            <ImgInput v-model:model-value="cover"></ImgInput>
+            <TagInput v-model:model-value="tags"></TagInput>
             <div class="tools">
                 <a @click="show = false">取消</a>
-                <a @click="uploadArticle">上传</a>
+                <a @click="uploadArticle">{{ getApiName() }}</a>
             </div>
         </div>
     </CoverBox>

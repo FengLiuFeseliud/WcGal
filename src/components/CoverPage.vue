@@ -72,7 +72,7 @@
         margin: auto;
         margin-top: 1rem;
 
-        box-shadow: 10px 10px 10px rgb(80, 80, 80);
+        box-shadow: 10px 10px 10px var(--shadow-color);
     }
 
     .card-list{
@@ -118,7 +118,7 @@
         
         margin: 4%;
 
-        box-shadow: 1px 1px 2.5px 2.5px rgb(208, 207, 207);
+        box-shadow: 1px 1px 2.5px 2.5px var(--shadow-color);
         border-radius: 5px;
     }
 

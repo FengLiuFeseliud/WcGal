@@ -1,6 +1,6 @@
 import { Log } from "@/stores/LogStore";
 import { useUserStore } from "@/stores/UserStore";
-import { type AxiosError, type AxiosInstance } from "axios";
+import { type AxiosError, type AxiosInstance, type AxiosResponse } from "axios";
 import axios from "axios";
 
 interface Response<T>{
@@ -36,24 +36,36 @@ class AxiosUilt {
         return new AxiosUilt(AxiosUilt.api);
     }
 
+    private static resetToken(response: AxiosResponse<any, any>){
+        const token = response.headers["token"]
+        if(token == undefined){
+            return
+        }
+        localStorage.setItem("token", token)
+        useUserStore().token = token
+    }
+
     public async post<D = any, T = any>(path: string, data?: D): Promise<Response<T> | null>{
-        const response: Response<T> = await this.instance.post(path, data)
+        const responseData: Response<T> = await this.instance.post(path, data)
         .then(response => {
+            AxiosUilt.resetToken(response)
             return response.data
         })
         .catch((error: AxiosError) => {
             if(error.response === undefined){
                 Log.error(error.message)
                 return null
+            } else {
+                AxiosUilt.resetToken(error.response)
             }
             return error.response.data
         })
         
         
-        if(response.code != 200){
-            Log.error(response.message)
+        if(responseData.code != 200){
+            Log.error(responseData.message)
         }
-        return response
+        return responseData
     }
 
     public async upload(path: string, filesData: FileList):  Promise<Response<string[]> | null>{
@@ -67,12 +79,15 @@ class AxiosUilt {
             headers: { "Content-Type": "multipart/form-data" }
         })
         .then(response => {
+            AxiosUilt.resetToken(response)
             return response.data
         })
         .catch((error: AxiosError) => {
             if(error.response === undefined){
                 Log.error(error.message)
                 return null
+            } else {
+                AxiosUilt.resetToken(error.response)
             }
             return error.response.data
         })
