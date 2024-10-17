@@ -32,6 +32,7 @@ button {
 
 /** 删除网站纵向滚动条 */
 html {
+    scroll-behavior:smooth;
     overflow-x: hidden;
 }
 
@@ -49,6 +50,11 @@ html {
     height: fit-content;
     
     background-color: var(--app-background-color);
+}
+
+.snow::after {
+    content: "❆";
+    color: var(--snow-color);
 }
 
 /** 亮色主题 */
@@ -85,6 +91,7 @@ html {
     --warming-color: #d9d900;
      /** error 日志颜色 */
     --error-color: #d50000;
+    --snow-color: rgb(193, 238, 255);
 
     /** -markdown editor **/
     --markdown-editor-tools-bar-color: rgba(135, 207, 235, 0.8);
@@ -137,6 +144,7 @@ html {
     --warming-color: #d9d900;
      /** error 日志颜色 */
     --error-color: #d50000;
+    --snow-color: #fff;
 
     /** -markdown editor **/
     --markdown-editor-tools-bar-color: rgba(255, 165, 0, 0.8);

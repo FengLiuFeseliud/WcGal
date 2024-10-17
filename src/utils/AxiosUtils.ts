@@ -26,7 +26,6 @@ class AxiosUilt {
             baseURL: url,
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
                 'token': useUserStore().token
             }
         })

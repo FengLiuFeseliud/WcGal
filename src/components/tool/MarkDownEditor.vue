@@ -63,7 +63,8 @@
         display: flex;
         flex-direction: column;
         align-items: stretch;
-
+        z-index: 1;
+        
         background-color: var(--markdown-editor-color);
     }
 

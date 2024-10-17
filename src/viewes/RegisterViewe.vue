@@ -51,6 +51,7 @@
         margin: auto;
         width: 25rem;
         height: 15.3rem;
+        z-index: 1;
 
         border-radius: 1rem;
         background-color: var(--cover-page-background-color);

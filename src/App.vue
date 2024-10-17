@@ -4,9 +4,11 @@
     import LogBox from "./components/box/LogBox.vue";
     import SearchBox from '@/components/box/SearchBox.vue';
     import ToTopButton from "./components/button/ToTopButton.vue";
+    import SnowFlake from "./components/cover/SnowFlake.vue";
 </script>
 
 <template>
+    <SnowFlake v-bind:model-value="100"></SnowFlake>
     <TopBar/>
     
     <div id="top"></div>

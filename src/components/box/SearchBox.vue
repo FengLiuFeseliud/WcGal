@@ -42,7 +42,7 @@
 <style scoped>
     .cover {
         position: fixed;
-        z-index: 9;
+        z-index: 3;
 
         align-items: center;
         background-color: var(--cover-page-background-color-deep);

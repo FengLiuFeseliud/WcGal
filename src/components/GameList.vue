@@ -3,8 +3,6 @@
 */
 <script lang="ts" setup>
     import { ArticleRequest, type Article } from '@/request/ArticleRequest'
-    import Card from './Card.vue'
-    import TagBar from './bar/TagBar.vue';
     import { onActivated, onDeactivated, ref, watch, type Ref} from 'vue';
     import { useArticleStore } from '@/stores/ArticleStore';
     import { Log } from '@/stores/LogStore';

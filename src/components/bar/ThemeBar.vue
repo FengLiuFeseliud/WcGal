@@ -1,10 +1,12 @@
 <script lang="ts" setup>
     import { ref } from 'vue';
     import DropDownBox from '../box/DropDownBox.vue';
+    import { useWebStore } from '@/stores/WebStore';
 
     const themes = ref<string>("default")
-    var root = document.querySelector(":root")
+    const useStore = useWebStore()
 
+    var root = document.querySelector(":root")
     if(root !== null){
         let themeNmae = localStorage.getItem("data-themes")
         root.setAttribute("data-themes", themeNmae !== null ? themeNmae : "default")
@@ -26,6 +28,11 @@
         let themeNmae = localStorage.getItem("data-themes")
         themes.value = themeNmae !== null ? themeNmae : "default"
     }
+
+    function onSonwShow(){
+        useStore.snowShow = !useStore.snowShow
+        localStorage.setItem("snow", String(useStore.snowShow))
+    }
 </script>
 
 <template>
@@ -37,6 +44,8 @@
         <template #list>
             <a class="iconfont icon-liangse" @click="onTheme" v-show="themes == 'dark'"> 亮色</a>
             <a class="iconfont icon-anse" @click="onTheme" v-show="themes == 'default'"> 暗色</a>
+            <a class="iconfont icon-yun_o" @click="onSonwShow" v-show="useStore.snowShow"> 关闭下雪</a>
+            <a @click="onSonwShow" v-show="!useStore.snowShow">❆ 下雪</a>
         </template>
     </DropDownBox>
 </template>

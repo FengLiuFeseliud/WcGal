@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5388008",
+      "name": "云_o",
+      "font_class": "yun_o",
+      "unicode": "ebb3",
+      "unicode_decimal": 60339
+    },
+    {
       "icon_id": "1149531",
       "name": "字体图标2_右",
       "font_class": "zititubiao2you",

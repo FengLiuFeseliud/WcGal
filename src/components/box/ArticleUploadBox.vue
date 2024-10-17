@@ -89,7 +89,7 @@
         height: 100vh;
         flex-direction: column;
         justify-content: center;
-        z-index: 1;
+        z-index: 2;
         
         background-color: var(--cover-page-background-color-deep);
     }
