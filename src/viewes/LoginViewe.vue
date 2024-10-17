@@ -33,8 +33,8 @@
             return
         }
 
-        Log.info("登录成功~ 跳转至主页~ awa")
-        router.push({"path": "/"})
+        Log.info("登录成功~ 返回上一页~ awa")
+        router.back()
     }
 </script>
 

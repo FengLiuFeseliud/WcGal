@@ -29,7 +29,7 @@
         border-radius: 10px;
 
         color: var(--font-color);
-        box-shadow: 5px 5px 5px rgb(80, 80, 80);
+        box-shadow: 5px 5px 5px var(--shadow-color-deep);
         transition: all 0.25s;
     }
 

@@ -78,6 +78,7 @@ html {
      /** 可点击字体颜色 */
     --link-hover-font-color: pink;
     --shadow-color: rgb(208, 207, 207);
+    --shadow-color-deep: rgb(109, 109, 109);
     /** info 日志颜色 */
     --info-color: skyblue;
      /** warming 日志颜色 */

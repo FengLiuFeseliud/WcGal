@@ -28,17 +28,14 @@
     }
 
     window.addEventListener("scroll", scrollReset)
-    onActivated(() => {
-        canShowButton()
-        window.addEventListener("scroll", scrollReset)
-    })
+    onActivated(() => {window.addEventListener("scroll", scrollReset)})
     onDeactivated(() => window.removeEventListener("scroll", scrollReset))
 </script>
 
 <template>
     <div class="to-top-box" :style="{right: (hied ? '0': '5.9vw'), bottom: (hied ? '15.5vh': '13.5vh')}">
         <a v-show="show && !hied" :href="toTop ? '#top': '#bottom' " :class="'to-top-button iconfont icon-' + (toTop ? 'xiangshang': 'xiangxia')"></a>
-        <button @click="hied = !hied" :class="'hied iconfont icon-' + (hied ? 'zititubiao2zuo' : 'zititubiao2you')"></button>
+        <button v-show="show" @click="hied = !hied" :class="'hied iconfont icon-' + (hied ? 'zititubiao2zuo' : 'zititubiao2you')"></button>
     </div>
 </template>
 
@@ -55,10 +52,15 @@
         padding: 1rem;
         font-size: 2rem;
 
-        border-radius: 1rem;
+        border-radius: 1.5rem;
         color: var(--font-color);
+        border: 0.3rem solid var(--font-color);
         background-color: var(--div-background-color);
         transition: all 0.2s;
+    }
+
+    .to-top-box > * {
+        box-shadow: 0.3rem 0.3rem 0.5rem var(--shadow-color-deep);
     }
 
     .to-top-button:hover {
@@ -71,6 +73,7 @@
         height: 3rem;
 
         color: var(--font-color);
+        border: 0.2rem solid var(--font-color);
         background-color: var(--div-background-color);
         border-radius: 1rem;
         transition: all 0.2s;

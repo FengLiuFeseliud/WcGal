@@ -122,7 +122,9 @@
         padding: 4vh 2vw;
         padding-top: 2vh;
 
+        
         border-radius: 1rem;
+        box-shadow: 0.6rem 0.6rem 0.8rem var(--shadow-color-deep);
         background-color: var(--div-background-color);
     }
 
@@ -164,6 +166,7 @@
         gap: 0.5rem;
 
         border-radius: 1rem;
+        box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color-deep);
         background-color: var(--div-background-color);
     }
 
@@ -177,6 +180,7 @@
         overflow: hidden;
 
         border-radius: 1rem;
+        box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color-deep);
         background-color: var(--div-background-color);
     }
 
@@ -235,6 +239,7 @@
         text-wrap: nowrap;
 
         border-radius: 1rem;
+        box-shadow: 0.5rem 0.5rem 0.7rem var(--shadow-color-deep);
         background-color: var(--div-background-color);
     }
 
