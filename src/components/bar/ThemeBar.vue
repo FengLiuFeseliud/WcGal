@@ -45,7 +45,7 @@
             <a class="iconfont icon-liangse" @click="onTheme" v-show="themes == 'dark'"> 亮色</a>
             <a class="iconfont icon-anse" @click="onTheme" v-show="themes == 'default'"> 暗色</a>
             <a class="iconfont icon-yun_o" @click="onSonwShow" v-show="useStore.snowShow"> 关闭下雪</a>
-            <a @click="onSonwShow" v-show="!useStore.snowShow">❆ 下雪</a>
+            <a class="iconfont" @click="onSonwShow" v-show="!useStore.snowShow">❆ 下雪</a>
         </template>
     </DropDownBox>
 </template>

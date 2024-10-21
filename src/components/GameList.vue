@@ -2,61 +2,25 @@
 组件 - 下滑加载文章
 */
 <script lang="ts" setup>
-    import { ArticleRequest, type Article } from '@/request/ArticleRequest'
-    import { onActivated, onDeactivated, ref, watch, type Ref} from 'vue';
+    import { ArticleRequest } from '@/request/ArticleRequest'
+    import { onActivated, onDeactivated, watch} from 'vue';
     import { useArticleStore } from '@/stores/ArticleStore';
     import { Log } from '@/stores/LogStore';
     import WaterFallBox from './box/WaterFallBox.vue';
-
+    import { Page } from '@/utils/PageUtils';
+    
     const useStore = useArticleStore()
-    var articles: Ref<Article[]> = ref([])
-    var page: number = 0
-    var pages: number = 0
     var keywordData = ""
-
-    async function resetList(){
-        page = 0
-        var fun = ArticleRequest.getArticles(page, 10, useStore.desc, keywordData);
-        page += 1
-        var data = await fun
-        if(data == null){
-            return
-        }
-
-        articles.value = data.data
-        pages = data.pages
-    }
+    const page = new Page(10, async (page, limit) => {
+        return await ArticleRequest.getArticles(page, limit, useStore.desc, keywordData)
+    })
 
     async function onSearch(searcKeyword: string){
         keywordData = searcKeyword + " "
         useStore.checkedTags.forEach(tag => {
             keywordData += "#" + tag.tagName + " "
         })
-        await resetList()
-    }
-
-    async function scrollGat() {
-        if(document.documentElement.clientHeight + window.scrollY + 4 < document.documentElement.scrollHeight){
-            return
-        }
-
-        if(page > pages){
-            return
-        }
-        
-        var fun = ArticleRequest.getArticles(page, 10, useStore.desc, keywordData);
-        page += 1
-        var data = await fun
-        if(data == null){
-            return
-        }
-
-        if(data.data.length == 0){
-            Log.warming("欧尼酱... 到底了啦... 不能再下面了啦...")
-        }
-
-        articles.value = articles.value.concat(data.data)
-        pages = data.pages
+        await page.resetList.bind(page)()
     }
 
     watch(() => useStore.desc, async (desc: boolean) => {
@@ -65,7 +29,7 @@
         } else {
             Log.info("正在进行日期正序显示文章... 等等哦~")
         }
-        await resetList()
+        await page.resetList.bind(page)()
         Log.info("重新完成排序啦！！！")
     })
 
@@ -81,18 +45,18 @@
         Log.info("搜索完成啦！！！")
     })
 
-    onActivated(() => window.addEventListener("scroll", scrollGat))
-    onDeactivated(() => window.removeEventListener("scroll", scrollGat))
+    onActivated(page.startScroll.bind(page))
+    onDeactivated(page.endScroll.bind(page))
 </script>
 
 <template>
     <div class="game-list">
-        <div class="not-article" v-if="!articles.length">
+        <div class="not-article" v-if="!page.list.value.length">
             <h1>没有搜索到文章...</h1>
             <img src="../assets/not-article.jpg" loading="lazy" />
         </div>
 
-        <WaterFallBox :column="2" :itemWidth="'25vw'" :itemAddHigh="'0vh'" :datas="articles">
+        <WaterFallBox :column="2" :itemWidth="'25vw'" :itemAddHigh="'0vh'" :datas="page.list.value">
             
         </WaterFallBox>
     </div>

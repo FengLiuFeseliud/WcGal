@@ -2,17 +2,19 @@ import { Log } from "@/stores/LogStore";
 import { useUserStore } from "@/stores/UserStore";
 import { AxiosUilt, type Response } from "@/utils/AxiosUtils";
 
-interface User {
+interface UserInfo {
     userId: number
     userName: string
-    email: string
     head: string
     admin: boolean
+}
+
+interface User extends UserInfo {
+    email: string
     createTime: string
     updateTime: string
     token: string
 }
-
 
 class UserRequest {
 
@@ -85,4 +87,4 @@ class UserRequest {
 }
 
 
-export { UserRequest, type User }
+export { UserRequest, type User, type UserInfo }

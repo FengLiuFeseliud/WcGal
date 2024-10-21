@@ -18,4 +18,36 @@ function showPlaceholderList(placeholder: Ref<string>, placeholders: string[], t
     }, time)
 }
 
-export { showPlaceholderList }
+function getSmallTime(tiem: string): string{
+    const tiemDate = new Date(Date.parse(tiem))
+    const date = Math.floor(tiemDate.getTime() / 1000)
+    const newDate = Math.floor(new Date().getTime() / 1000)
+
+    const day = Math.floor((newDate - date) / (60 * 60 * 24))
+    if(day > 5){
+        return tiemDate.getFullYear() + "/" + (tiemDate.getMonth() + 1) + "/" + tiemDate.getDay()
+    }
+
+    if(day >= 1){
+        return day + "天前"
+    }
+
+    const hours = Math.floor((newDate - date) / (60 * 60))
+    if(hours >= 1){
+        return hours + "小时前"
+    }
+
+    const minutes = Math.floor((newDate - date) / 60)
+    if(minutes >= 1){
+        return minutes + "分钟前"
+    }
+
+    const seconds = newDate - date
+    if(seconds > 30){
+        return seconds + "秒前"
+    }
+
+    return "刚刚"
+}
+
+export { showPlaceholderList , getSmallTime }

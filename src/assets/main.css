@@ -41,7 +41,8 @@ html {
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
-    background-image: url("https://github.com/FengLiuFeseliud/pycqBot/blob/master/docs/img/bg.png?raw=true");
+    background-image: url("http://localhost:8080/img/bg.jpg?scale=0.5");
+    /* background-image: url("https://github.com/FengLiuFeseliud/pycqBot/blob/master/docs/img/bg.png?raw=true"); */
 }
 
 #app {
@@ -92,6 +93,7 @@ html {
      /** error 日志颜色 */
     --error-color: #d50000;
     --snow-color: rgb(193, 238, 255);
+    --admin-name: #ff6969;
 
     /** -markdown editor **/
     --markdown-editor-tools-bar-color: rgba(135, 207, 235, 0.8);
@@ -145,6 +147,7 @@ html {
      /** error 日志颜色 */
     --error-color: #d50000;
     --snow-color: #fff;
+    --admin-name: rgb(210, 255, 137);
 
     /** -markdown editor **/
     --markdown-editor-tools-bar-color: rgba(255, 165, 0, 0.8);

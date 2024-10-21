@@ -1,6 +1,6 @@
 import { useArticleStore } from "@/stores/ArticleStore";
 import { AxiosUilt, type PageResponse, type Response } from "@/utils/AxiosUtils";
-import type { User } from "./UserRequest";
+import type { UserInfo } from "./UserRequest";
 
 interface Tag{
     tagId: number
@@ -23,7 +23,7 @@ class TagData implements Tag {
 interface Article{
     articleId: number
     articleTitle: string
-    articleAuthor: User
+    articleAuthor: UserInfo
     articleContent: string
     cover: string
     tags: string
@@ -35,6 +35,7 @@ interface Article{
     favorites: number
     comments: number
 }
+
 
 class ArticleRequest{
     private static allTags: Tag[]
@@ -52,10 +53,6 @@ class ArticleRequest{
             desc: desc != null ? desc : false
         }))
 
-        if(data == null){
-            return null
-        }
-
         if(keyword === undefined || keyword == ""){
             useArticleStore().setCount(data.count)
         }
@@ -69,7 +66,7 @@ class ArticleRequest{
         }
 
         useArticleStore().setCount(data.data)
-        return data.data
+        return data.data == null ? 0: data.data
     }
 
     public static async getAllTags(): Promise<Tag[]> {

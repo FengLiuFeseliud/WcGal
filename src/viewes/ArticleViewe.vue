@@ -1,18 +1,21 @@
 <script lang="ts" setup>
+    import CommentBox from '@/components/box/CommentAreaBox.vue';
     import MarkDown from '@/components/tool/MarkDown.vue';
     import { ArticleRequest, type Article } from '@/request/ArticleRequest';
     import { FileRequest } from '@/request/FileRequest';
     import { router } from '@/router';
     import { useArticleStore } from '@/stores/ArticleStore';
     import { Log } from '@/stores/LogStore';
-    import { getTime, toTop } from '@/utils/HtmlUtils';
+    import { toTop } from '@/utils/HtmlUtils';
     import { onActivated, ref } from 'vue';
+    import { getSmallTime } from '@/utils/TextUtils';
     
     const { articleId } = defineProps<{articleId: string}>()
     const like = ref<boolean>(false)
     const likeEd = ref<boolean>(false)
     const favorite = ref<boolean>(false)
     const favoriteEd = ref<boolean>(false)
+    const resourceId = ref<string>()
     
     var article = ref<Article>()
     var preArticleId: number
@@ -36,6 +39,7 @@
             setTimeout(() => {
                 router.back()
             }, 1000)
+            return
         }
 
         article.value = response.data
@@ -43,6 +47,7 @@
             useArticleStore().lookArticle = article.value
         }
         preArticleId = article.value.articleId
+        resourceId.value = "ar_" + article.value.articleId
     }
 
     async function onLike() {
@@ -74,9 +79,9 @@
                 <hr>
                 <i class="iconfont favorite icon-favorites-fill">&nbsp;<span>{{ article.favorites }}</span></i>&nbsp;
                 <hr>
-                <i class="iconfont icon-e-date-upload">&nbsp;<span>{{ getTime(article.createTime) }}</span></i>&nbsp;
+                <i class="iconfont icon-e-date-upload">&nbsp;<span>{{ getSmallTime(article.createTime) }}</span></i>&nbsp;
                 <hr>
-                <i class="iconfont icon-update">&nbsp;<span>{{ getTime(article.updateTime) }}</span></i>
+                <i class="iconfont icon-update">&nbsp;<span>{{ getSmallTime(article.updateTime) }}</span></i>&nbsp;
                 <hr>
                 <RouterLink :to="'/upload/' + article.articleId" class="iconfont bianji icon-bianji">&nbsp;<span>编辑</span></RouterLink>
             </div>
@@ -88,7 +93,6 @@
                 <img :src="FileRequest.img(article.articleAuthor.head + '?scale=0.3')">
                 <div class="author-data">
                     <i class="iconfont icon-nickname_default">&nbsp;<span>{{ article.articleAuthor.userName }}</span></i>
-                    
                 </div>
             </RouterLink>
 
@@ -106,7 +110,7 @@
                 </button>
             </div>
         </div>
-        
+        <CommentBox v-model:model-value="resourceId"></CommentBox>
     </div>
 </template>
 
@@ -125,7 +129,7 @@
 
         
         border-radius: 1rem;
-        box-shadow: 0.6rem 0.6rem 0.8rem var(--shadow-color-deep);
+        box-shadow: 0.6rem 0.6rem 1.2rem var(--shadow-color-deep);
         background-color: var(--div-background-color);
     }
 
@@ -250,5 +254,13 @@
         font-weight: bold;
         font-size: 1.2rem;
         color: var(--font-color-2);
+    }
+
+    .comment-area-box {
+        margin: 2.5rem 5rem;
+        padding: 2rem;
+
+        border-radius: 1rem;
+        background-color: var(--cover-page-background-color);
     }
 </style>

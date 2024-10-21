@@ -7,7 +7,7 @@
     })
 
     function randomX(): string{
-        return Math.floor((Math.random()*98)+2) + "vw";
+        return Math.floor((Math.random()*108)+2) - 10 + "vw";
     }
 
     function randomDuration(): string{

@@ -17,6 +17,7 @@
     const uiType = ref<UiType>(UiType.EditorAndlMarkDown)
 
     async function uploadImg(e: Event){
+        console.log(text.value)
         const input = e.target as HTMLInputElement
         if(input.files == null){
             return
@@ -35,7 +36,7 @@
                 <button class="button iconfont icon-upload" @click="showUpload = !showUpload"></button>
                 <button class="button iconfont icon-save-lined" ></button>
                 <label class="button iconfont icon-img" for="upload">
-                    <input type="file" id="upload" accept="image/*" @change="uploadImg">
+                    <input type="file" id="upload" accept="image/*" @change="uploadImg" >
                 </label>
             </div>
             <div class="markdown-editor-title">
@@ -151,6 +152,7 @@
 
     .markdown-editor-line > .markdown-line-span::before {
         content: counter(line);
+        height: 100%;
     }
 
     .markdown-editor-input {
@@ -170,5 +172,9 @@
 
     :deep(.markdown) {
         padding: 0 1.5rem;
+    }
+
+    :deep(.markdown) img {
+        max-width: 100%;
     }
 </style>

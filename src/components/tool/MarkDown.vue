@@ -39,15 +39,18 @@
 </script>
 
 <template>
-     <div class="markdown" v-if="!line"  v-html="md.render(text)" v-show="show"></div>
-     <div class="markdown-line markdown" v-if="line" v-show="show">
+    <div class="markdown-line markdown" v-if="line" v-show="show">
         <span class="markdown-line-span" v-for="item in text.split('\n')" :key="item" v-html="md.render(item)"></span>
      </div>
+     <div class="markdown" v-if="!line"  v-html="md.render(text)" v-show="show"></div>
 </template>
 
 <style scoped>
     .markdown {
         padding: 1.5rem;
+
+        word-wrap: break-word;
+        word-break: keep-all;
     } 
 
     .markdown-line-span {
