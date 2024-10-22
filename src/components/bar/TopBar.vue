@@ -44,29 +44,29 @@
         margin-right: 1rem;
     }
 
-    #top-bar >>> a {
+    #top-bar :deep(a) {
         color: var(--font-color);
         transition: all 0.2s;
         margin: 0 0.5rem;
     }
 
-    #top-bar >>> a:hover {
+    #top-bar :deep(a:hover) {
         color: var(--link-hover-font-color);
         margin: 0 0.5rem;
     }
 
-    #top-bar >>> .drop-down-box {
+    #top-bar :deep(.drop-down-box) {
         color: var(--font-color);
         transition: all 0.2s;
         margin: 0 0.5rem;
     }
 
-    #top-bar >>> .drop-down-box:hover {
+    #top-bar :deep(.drop-down-box:hover) {
         color: var(--link-hover-font-color);
         margin: 0 0.5rem;
     }
 
-    #top-bar >>> button {
+    #top-bar :deep(button) {
         margin: 0 0.5rem;
     }
 

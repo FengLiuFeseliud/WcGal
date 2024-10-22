@@ -31,7 +31,9 @@
     }
 
     function delTag(){
-        checkedTags.value.pop()
+        if(tagName.value == undefined || tagName.value == ""){
+            checkedTags.value.pop()
+        }
     }
 </script>
 

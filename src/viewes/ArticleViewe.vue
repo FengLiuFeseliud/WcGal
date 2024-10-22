@@ -1,6 +1,7 @@
 <script lang="ts" setup>
     import CommentBox from '@/components/box/CommentAreaBox.vue';
     import MarkDown from '@/components/tool/MarkDown.vue';
+    import ConfirmButton from '@/components/button/ConfirmButton.vue';
     import { ArticleRequest, type Article } from '@/request/ArticleRequest';
     import { FileRequest } from '@/request/FileRequest';
     import { router } from '@/router';
@@ -9,13 +10,16 @@
     import { toTop } from '@/utils/HtmlUtils';
     import { onActivated, ref } from 'vue';
     import { getSmallTime } from '@/utils/TextUtils';
+    import { useUserStore } from '@/stores/UserStore';
     
+    const useStore = useUserStore()
     const { articleId } = defineProps<{articleId: string}>()
     const like = ref<boolean>(false)
     const likeEd = ref<boolean>(false)
     const favorite = ref<boolean>(false)
     const favoriteEd = ref<boolean>(false)
     const resourceId = ref<string>()
+    const delConfirm = ref<boolean>(false)
     
     var article = ref<Article>()
     var preArticleId: number
@@ -60,6 +64,10 @@
         favoriteEd.value = favorite.value ? true: false
     }
 
+    async function delArticle() {
+        
+    }
+
     onActivated(async () => {
         await getArticle(articleId)
         toTop()
@@ -71,19 +79,24 @@
         <div class="article" v-if="article !== undefined">
             <h1>{{ article.articleTitle }}</h1>
             <div class="article-data">
-                <i class="iconfont icon-views">&nbsp;<span>{{ article.views }}</span></i> &nbsp;
+                <i class="iconfont icon-views">&nbsp;<span>{{ article.views }}</span></i>
                 <hr>
-                <i class="iconfont icon-message-comments">&nbsp;<span>{{ article.comments }}</span></i>&nbsp;
+                <i class="iconfont icon-message-comments">&nbsp;<span>{{ article.comments }}</span></i>
                 <hr>
-                <i class="iconfont like icon-likes">&nbsp;<span>{{ article.likes }}</span></i>&nbsp;
+                <i class="iconfont like icon-likes">&nbsp;<span>{{ article.likes }}</span></i>
                 <hr>
-                <i class="iconfont favorite icon-favorites-fill">&nbsp;<span>{{ article.favorites }}</span></i>&nbsp;
+                <i class="iconfont favorite icon-favorites-fill">&nbsp;<span>{{ article.favorites }}</span></i>
                 <hr>
-                <i class="iconfont icon-e-date-upload">&nbsp;<span>{{ getSmallTime(article.createTime) }}</span></i>&nbsp;
+                <i class="iconfont icon-e-date-upload">&nbsp;<span>{{ getSmallTime(article.createTime) }}</span></i>
                 <hr>
-                <i class="iconfont icon-update">&nbsp;<span>{{ getSmallTime(article.updateTime) }}</span></i>&nbsp;
+                <i class="iconfont icon-update">&nbsp;<span>{{ getSmallTime(article.updateTime) }}</span></i>
                 <hr>
-                <RouterLink :to="'/upload/' + article.articleId" class="iconfont bianji icon-bianji">&nbsp;<span>编辑</span></RouterLink>
+                <RouterLink class="iconfont bianji icon-bianji" v-if="useStore.isMyOrAdmin(article.articleAuthor.userId)"
+                    :to="'/upload/' + article.articleId">&nbsp;<span>编辑</span></RouterLink>
+                <hr v-if="useStore.isMyOrAdmin(article.articleAuthor.userId)">
+                <a class="iconfont icon-shanchu" @click="delConfirm = true"
+                    v-if="useStore.isMyOrAdmin(article.articleAuthor.userId)">&nbsp;<span>删除</span></a>
+                <ConfirmButton :text="'真的要删除文章么...'" v-model:model-value="delConfirm" @confirm="delArticle" />
             </div>
             <hr>
             <MarkDown :text="'${toc}\n' + article.articleContent" :line="false" :show="true"></MarkDown>
@@ -138,6 +151,10 @@
         margin-bottom: 1rem;
     }
 
+    .article-data > .confirm {
+        margin-left: 27%;
+    }
+
     .ritem {
         position: fixed;
         display: flex;
@@ -152,10 +169,13 @@
     .article-data {
         display: flex;
         flex-wrap: wrap;
-        gap: 0.2rem;
+        gap: 0.5rem;
     }
 
     .article-data > * {
+        position: relative;
+        z-index: 2;
+
         font-size: 1.2rem;
         color: var(--font-color-2);
     }
@@ -163,6 +183,11 @@
     .article-data > * > span {
         font-size: 1rem;
         color: var(--font-color);
+        transition: all 0.2s;
+    }
+
+    .article-data > * > span:hover {
+        color: var(--link-hover-font-color);
     }
 
     .author-info {
@@ -234,7 +259,7 @@
         color: var(--link-hover-font-color);
     }
 
-    .article >>> .markdown > .table-of-contents {
+    .article :deep(.markdown > .table-of-contents) {
         width: 15vw;
         position: fixed;
         padding: 1vw;
@@ -248,7 +273,7 @@
         background-color: var(--div-background-color);
     }
 
-    .article >>> .markdown > .table-of-contents::before {
+    .article :deep(.markdown > .table-of-contents::before) {
         content: "目录";
 
         font-weight: bold;

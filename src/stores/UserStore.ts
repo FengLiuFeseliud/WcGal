@@ -22,6 +22,18 @@ const useUserStore = defineStore("userStore", () => {
         email.value = user.email
     }
 
+    function isLogin(){
+        return userId.value
+    }
+
+    function notLogin(){
+        return !userId.value
+    }
+
+    function isMyOrAdmin(uesrId: number){
+        return (isLogin() && userId.value === uesrId) || admin.value
+    }
+
     return {
         userId,
         userName,
@@ -29,7 +41,10 @@ const useUserStore = defineStore("userStore", () => {
         admin,
         token,
         email,
-        setUser
+        setUser,
+        isLogin,
+        notLogin,
+        isMyOrAdmin
     }
 })
 

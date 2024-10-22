@@ -7,6 +7,7 @@
     import MarkDown from '@/components/tool/MarkDown.vue';
     import CommentInput from '../input/CommentInput.vue';
     import { Log } from '@/stores/LogStore';
+    import ConfirmButton from '../button/ConfirmButton.vue';
     
     const useStore = useUserStore()
     const { comment } = defineProps<{comment: Comment}>()
@@ -48,17 +49,11 @@
                 <i class="iconfont icon-update" v-if="comment.createTime != comment.updateTime"
                     >&nbsp;{{ getSmallTime(comment.updateTime) }}</i>
                 <button class="iconfont icon-gerenyouxiang_cebianlan_huifu" 
-                    v-if="useStore.token != 'null'" @click="replyShow = !replyShow"></button>
-                <div v-if="(useStore.token !== 'null' && useStore.userId === comment.commentAuthor.userId) || useStore.admin">
+                    v-if="useStore.isLogin()" @click="replyShow = !replyShow"></button>
+                <div v-if="useStore.isMyOrAdmin(comment.commentAuthor.userId)">
                     <button class="iconfont icon-bianji" @click="editShow = !editShow">&nbsp;</button>
                     <button class="iconfont icon-shanchu" @click="delConfirm = true">&nbsp;</button>
-                    <div class="del-confirm" v-if="delConfirm">
-                        <span>真的要删除评论么...</span>
-                        <div class="confirm-buttons">
-                            <button @click="delConfirm = false">取消</button>
-                            <button @click="delComment">确定</button>
-                        </div>
-                    </div>
+                    <ConfirmButton :text="'真的要删除评论么...'" v-model:model-value="delConfirm" @confirm="delComment" />
                 </div>
             </div>
             <CommentInput :update="false" :reply="true" :comment-id="comment.commentId" 
@@ -102,6 +97,7 @@
 
     .comment-info > :deep(.markdown) {
         padding: 0;
+        padding-top: 0.3rem;
         font-size: 1.2rem;
     }
 
@@ -137,25 +133,5 @@
 
     .comment-set > div button:hover {
         color: var(--link-hover-font-color);
-    }
-
-    .del-confirm {
-        position: absolute;
-        overflow: hidden;
-        padding: 0.5rem;
-
-        color: var(--font-color);
-        background-color: var(--div-background-color);
-        border-radius: 1rem;
-        border: 0.2rem solid var(--font-color);
-    }
-
-    .confirm-buttons {
-        display: flex;
-        margin-top: 0.5rem;
-    }
-
-    .confirm-buttons > button {
-        flex: 1;
     }
 </style>

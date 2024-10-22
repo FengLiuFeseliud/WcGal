@@ -69,21 +69,21 @@
         width: 30vw;
     }
 
-    .search-bar >>> label {
+    .search-bar :deep(label) {
         padding: 0.5rem;
         font-size: 2rem;
     }
 
-    .search-bar >>> input {
+    .search-bar :deep(input) {
         font-size: 1.3rem;
         padding: 0.5rem;
     }
 
-    .search-bar >>> i {
+    .search-bar :deep(i) {
         font-size: 2rem;
     }
 
-    .box >>> .tag {
+    .box :deep(.tag) {
         margin: 0.2rem;
     }
 

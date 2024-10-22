@@ -20,18 +20,13 @@ class Page<T> {
         this.getData = getData
     }
 
-    private async getDataAndSetPage(reset: boolean): Promise<T[] | null>{
+    private async getDataAndSetPage(): Promise<T[] | null>{
         const fun = this.getData(this.pageIn.value, this.limit);
         if(fun == null){
             return null
         }
 
-        if(!reset){
-            this.pageIn.value += 1
-        } else {
-            this.pageIn.value = 1
-        }
-
+        this.pageIn.value += 1
         const data = await fun
         if(data == null){
             return null
@@ -51,7 +46,7 @@ class Page<T> {
             return
         }
 
-        const data = await this.getDataAndSetPage(false)
+        const data = await this.getDataAndSetPage()
         if(data == null){
             return
         }
@@ -64,13 +59,15 @@ class Page<T> {
     }
 
     public async resetList(){
-        const data = await this.getDataAndSetPage(true)
+        this.pageIn.value = 0
+        this.list.value = []
+        const data = await this.getDataAndSetPage()
         this.list.value = data !== null ? data : []
     }
 
     public async to(pageIn: number): Promise<void>{
         if(this.pages == 0){
-            const data = await this.getDataAndSetPage(false)
+            const data = await this.getDataAndSetPage()
             if(data == null){
                 return
             }

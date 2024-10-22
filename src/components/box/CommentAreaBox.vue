@@ -42,8 +42,8 @@
             <div class="comment-sort-set">
                 <RadioBox :name="'sort'" :checked="0" :radio-types="[SortType.Likes, SortType.Desc, SortType.Asc]" v-model:model-value="sortType" />
             </div>
-            <span class="comment-need-login-info" v-if="useStore.token == 'null'">登录后发表跟回复评价哦~</span>
-            <CommentInput :comment-id="0" :update="false" :reply="false" v-model:resource-id="resourceId" v-if="useStore.token != 'null'"></CommentInput>
+            <span class="comment-need-login-info" v-if="useStore.notLogin()">登录后发表跟回复评价哦~</span>
+            <CommentInput :comment-id="0" :update="false" :reply="false" v-model:resource-id="resourceId" v-if="useStore.isLogin()"></CommentInput>
         </div>
         <div class="comment-info-box" v-for="(comment, index) in page.list.value" :key="index">
             <CommentBox :comment="comment"></CommentBox>

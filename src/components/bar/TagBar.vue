@@ -1,6 +1,5 @@
 <script lang="ts" setup>
     import type { Tag } from '@/request/ArticleRequest';
-    
 
     var { tags } = defineProps<{tags: Tag[]}>()
     const emits = defineEmits(['onTag'])
@@ -49,11 +48,9 @@
         margin-right: 6px;
 
         font-size: 80%;
-
         box-shadow: 0.5px 0.5px 1px 1px var(--shadow-color);
         border-radius: 3px;
         color: var(--font-color);
-
         transition: all 0.25s;
     }
 
