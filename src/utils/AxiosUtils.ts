@@ -63,9 +63,8 @@ class AxiosUilt {
 
         if(responseData.code == 401 && useUserStore().isLogin()){
             Log.error("登录过期！！！")
-            localStorage.removeItem("token")
+            useUserStore().loginOut()
         }
-        
         
         if(responseData.code != 200){
             Log.error(responseData.message)

@@ -22,6 +22,16 @@ const useUserStore = defineStore("userStore", () => {
         email.value = user.email
     }
 
+    function loginOut(){
+        userId.value = 0
+        userName.value = ""
+        head.value = ""
+        admin.value = false
+        email.value = ""
+        token.value = ""
+        localStorage.removeItem("token")
+    }
+
     function isLogin(){
         return userId.value
     }
@@ -42,6 +52,7 @@ const useUserStore = defineStore("userStore", () => {
         token,
         email,
         setUser,
+        loginOut,
         isLogin,
         notLogin,
         isMyOrAdmin

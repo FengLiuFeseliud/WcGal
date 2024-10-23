@@ -23,10 +23,10 @@ class UserRequest {
             return
         }
 
-        const data = (<Response<User>><unknown>(await AxiosUilt.create().instance.post("/user/info")))
+        const data = (<Response<User>><unknown>((await AxiosUilt.create().instance.post("/user/info")).data))
         if(data.code === 401 && useUserStore().isLogin()){
             Log.error("登录过期！！！")
-            localStorage.removeItem("token")
+            useUserStore().loginOut()
         }
         
         if(data.code !== 200 && data.code !== 401){

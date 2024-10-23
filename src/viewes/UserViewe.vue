@@ -40,7 +40,7 @@
 
 <template>
     <div class="user-box">
-
+        
     </div>
 </template>
 
