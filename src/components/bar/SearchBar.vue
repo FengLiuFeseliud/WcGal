@@ -1,10 +1,16 @@
 <script lang="ts" setup>
     import { showPlaceholderList } from '@/utils/TextUtils';
-    import { ref } from 'vue';
+    import { ref, watch } from 'vue';
 
     const [ desc ] = defineModel<boolean>()
-    const keyword = ref<string>()
+    const keyword = ref<string>("")
     const emits = defineEmits<{keyword: [keyword: string]}>()
+
+    watch(keyword, () => {
+        if(keyword.value == ""){
+            emits('keyword', keyword.value)
+        }
+    })
 
     const placeholder = ref<string>("")
     showPlaceholderList(placeholder, [
@@ -17,8 +23,8 @@
 <template>
     <div class="search-bar">
         <label class="iconfont icon-sousuo"></label>
-        <input type="text" v-model="keyword" :placeholder="placeholder">
-        <button @click="keyword != undefined ? emits('keyword', keyword): null">
+        <input type="text" v-model="keyword" :placeholder="placeholder" @keyup.enter="emits('keyword', keyword)">
+        <button @click="emits('keyword', keyword)">
             <i class="iconfont icon-a-Searchbar_unselected"></i>
         </button>
         <button @click="desc = !desc">
@@ -29,9 +35,11 @@
 
 <style scoped>
     .search-bar {
+        position: relative;
         display: flex;
         width: fit-content;
-        height: fit-content;
+        
+        z-index: 2;
     }
 
     .search-bar > * {
@@ -40,7 +48,7 @@
 
     .search-bar > label {
         color: rgb(111, 111, 111);
-        background-color: var(--div-background-color);
+        background-color: var(--input-color);
     }
 
     .search-bar i {
@@ -50,15 +58,16 @@
 
     .search-bar > input {
         flex: 1;
-        color: var(--font-color);
 
+        color: var(--font-color);
         outline: none;
+        background-color: var(--input-color);
     }
 
     .search-bar > button {
         color: var(--font-color);
         padding: 1%;
-        background-color: aliceblue;
+        background-color: var(--div-background-color-shallow);
     }
 
     .search-bar > button:hover {

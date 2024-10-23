@@ -11,8 +11,10 @@
     import { onActivated, ref } from 'vue';
     import { getSmallTime } from '@/utils/TextUtils';
     import { useUserStore } from '@/stores/UserStore';
+    import TagBar from '@/components/bar/TagBar.vue';
     
     const useStore = useUserStore()
+    const articleStore = useArticleStore()
     const { articleId } = defineProps<{articleId: string}>()
     const like = ref<boolean>(false)
     const likeEd = ref<boolean>(false)
@@ -109,6 +111,10 @@
                 </div>
             </RouterLink>
 
+            <div class="article-tag">
+                <TagBar :tags="article.tagsData" v-bind:model-value="articleStore.checkedTags"></TagBar>
+            </div>
+
             <div class="article-set">
                 <button class="iconfont back icon-back" @click="router.back"></button>
                 <button :class="'iconfont like ' + (like ? 'icon-likes' :'icon-likes1')" 
@@ -166,6 +172,12 @@
         gap: 1rem;
     }
 
+    .ritem > * {
+        border-radius: 1rem;
+        box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color-deep);
+        background-color: var(--div-background-color);
+    }
+
     .article-data {
         display: flex;
         flex-wrap: wrap;
@@ -194,10 +206,6 @@
         display: flex;
         padding: 0.8rem;
         gap: 0.5rem;
-
-        border-radius: 1rem;
-        box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color-deep);
-        background-color: var(--div-background-color);
     }
 
     .author-info > img {
@@ -205,13 +213,13 @@
         border-radius: 10rem;
     }
 
+    .article-tag {
+        padding: 0.5rem;
+    }
+
     .article-set {
         display: flex;
         overflow: hidden;
-
-        border-radius: 1rem;
-        box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color-deep);
-        background-color: var(--div-background-color);
     }
 
     .article-set > button {

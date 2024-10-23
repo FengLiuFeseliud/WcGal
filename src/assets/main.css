@@ -41,8 +41,8 @@ html {
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
-    background-image: url("http://localhost:8080/img/bg.jpg?scale=0.5");
-    /* background-image: url("https://github.com/FengLiuFeseliud/pycqBot/blob/master/docs/img/bg.png?raw=true"); */
+    /* background-image: url("http://localhost:8080/img/bg.jpg?scale=0.5"); */
+    background-image: url("https://github.com/FengLiuFeseliud/pycqBot/blob/master/docs/img/bg.png?raw=true");
 }
 
 #app {
@@ -64,6 +64,10 @@ html {
     --app-background-color: rgba(255, 255, 255, 0.5);
     /** 盒子颜色 */
     --div-background-color: #fff;
+     /** 盒子颜色 */
+     --div-background-color-shallow: aliceblue;
+    /** 深色盒子颜色 */
+    --div-background-color-deep: rgb(135, 206, 235);
     /** 深色盒子颜色 */
     --div-background-color-deep: rgb(135, 206, 235);
     /** 半透明盒子颜色 */
@@ -119,6 +123,8 @@ html {
     --app-background-color: rgba(35, 35, 35, 0.5);
     /** 盒子颜色 */
     --div-background-color: rgb(26, 26, 26);
+    /** 盒子颜色 */
+    --div-background-color-shallow: rgb(252, 198, 98);
     /** 深色盒子颜色 */
     --div-background-color-deep: rgb(255, 166, 0);
     /** 半透明盒子颜色 */

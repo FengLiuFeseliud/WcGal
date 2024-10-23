@@ -46,6 +46,7 @@
         padding: 2px 8px;
         display: inline-block;
         margin-right: 6px;
+        margin-bottom: 0.4rem;
 
         font-size: 80%;
         box-shadow: 0.5px 0.5px 1px 1px var(--shadow-color);

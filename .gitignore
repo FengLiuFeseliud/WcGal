@@ -14,6 +14,7 @@ dist-ssr
 coverage
 *.local
 
+.VSCodeCounter
 /cypress/videos/
 /cypress/screenshots/
 

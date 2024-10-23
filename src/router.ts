@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeViewe from "@/viewes/HomeViewe.vue";
+import SearchViewe from "@/viewes/SearchViewe.vue";
 
 
 const router = createRouter({
@@ -18,8 +19,15 @@ const router = createRouter({
         },
 
         {
+            path: "/search",
+            name: 'search',
+            component: SearchViewe
+        },
+
+        {
             path: "/article/:articleId",
             name: 'article',
+            beforeEnter: () => window.scrollTo({top: 0, behavior: "smooth"}),
             component: () => import("@/viewes/ArticleViewe.vue"),
             meta: {'title': '文章'},
             props: true
@@ -28,6 +36,7 @@ const router = createRouter({
         {
             path: "/user/:userId",
             name: "user",
+            beforeEnter: () => window.scrollTo({top: 0, behavior: "smooth"}),
             component: () => import('@/viewes/UserViewe.vue'),
             props: true
         },
@@ -35,18 +44,21 @@ const router = createRouter({
         {
             path: "/login",
             name: "login",
+            beforeEnter: () => window.scrollTo({top: 0}),
             component: () => import('@/viewes/LoginViewe.vue')
         },
 
         {
             path: "/register",
             name: "register",
+            beforeEnter: () => window.scrollTo({top: 0}),
             component: () => import('@/viewes/RegisterViewe.vue')
         },
 
         {
             path: "/password",
             name: "password",
+            beforeEnter: () => window.scrollTo({top: 0}),
             component: () => import('@/viewes/ResetPasswordViewe.vue')
         },
 
@@ -60,14 +72,16 @@ const router = createRouter({
             path: "/upload/:articleId",
             name: "upload",
             component: () => import('@/viewes/UploadViewe.vue'),
+            beforeEnter: () => window.scrollTo({top: 0, behavior: "smooth"}),
             props: true
         },
 
         {
             path: "/:pathMatch(.*)",
-            component: () => HomeViewe,
+            component: HomeViewe,
         }
      ]
 })
+
 
 export{ router }

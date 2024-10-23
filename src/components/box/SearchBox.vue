@@ -5,13 +5,17 @@
     import CoverBox from "./CoverBox.vue";
     import { useArticleStore } from "@/stores/ArticleStore";
     import { router } from "@/router";
+    import { watch } from "vue";
 
     const useStore = useArticleStore()
-
     function onSearch(data: string){
         useStore.search = data
-        router.push({"path": "/"})
+        router.push({"path": "/search"})
     }
+
+    watch(useStore.checkedTags, () => {
+        router.push({"path": "/search"})
+    })
 
     var preCode = ""
     function keyShow(key: KeyboardEvent){
@@ -80,11 +84,7 @@
     }
 
     .search-bar :deep(i) {
-        font-size: 2rem;
-    }
-
-    .box :deep(.tag) {
-        margin: 0.2rem;
+        font-size: 1.8rem;
     }
 
 </style>

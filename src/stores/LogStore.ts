@@ -44,6 +44,10 @@ const useLogStore = defineStore("log", () => {
     }
 
     function addLog(log: Log) {
+        if(getCount() && logs.value[getCount() - 1].data == log.data){
+            return
+        }
+
         logs.value.push(log)
     }
 
