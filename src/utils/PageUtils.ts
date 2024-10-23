@@ -3,9 +3,6 @@ import type { PageResponse } from "./AxiosUtils"
 import { ref, type Ref } from "vue"
 
 
-
-
-
 class Page<T> {
     public pageIn: Ref<number> = ref(0)
     private pages: number = 0
@@ -14,6 +11,7 @@ class Page<T> {
     private getData: (page: number, limit: number) => Promise<PageResponse<T[]> | null>
     private map: Map<number, T[]> = new Map()
     public list: Ref<T[]> = ref([])
+    public loading: Ref<boolean> = ref<boolean>(false)
 
     constructor(limit: number, getData: (page: number, limit: number) => Promise<PageResponse<T[]> | null>){
         this.limit = limit
@@ -21,6 +19,7 @@ class Page<T> {
     }
 
     private async getDataAndSetPage(): Promise<T[] | null>{
+        this.loading.value = true
         const fun = this.getData(this.pageIn.value, this.limit);
         if(fun == null){
             return null
@@ -42,7 +41,7 @@ class Page<T> {
             return
         }
 
-        if(this.pageIn.value > this.pages){
+        if(this.pageIn.value > this.pages || this.loading.value){
             return
         }
 
@@ -75,6 +74,7 @@ class Page<T> {
             this.pageIn.value = 0
             this.map.set(0, data)
             this.list.value = data
+            this.loading.value = false
             return
         }
         

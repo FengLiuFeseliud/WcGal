@@ -112,6 +112,7 @@
             </RouterLink>
 
             <div class="article-tag">
+                <span>文章标签</span>
                 <TagBar :tags="article.tagsData" v-bind:model-value="articleStore.checkedTags"></TagBar>
             </div>
 
@@ -215,6 +216,14 @@
 
     .article-tag {
         padding: 0.5rem;
+    }
+
+    .article-tag > span {
+        padding: 0.5rem;
+        
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: var(--font-color-2);
     }
 
     .article-set {

@@ -22,7 +22,7 @@
 </script>
 
 <template>
-    <Waterfall :list="page.list.value" :width="450" :gutter="20" :crossOrigin="false" backgroundColor="null">
+    <Waterfall :list="page.list.value" :width="450" :gutter="20" :crossOrigin="false" backgroundColor="null" @afterRender="page.loading.value = false" >
         <template #default="{ item }">
             <RouterLink :to="'/article/' + item.articleId" class="card">
                 <LazyImg :url="item.cover + '?scale=0.3'"/>
@@ -51,6 +51,7 @@
             </RouterLink>
         </template>
     </Waterfall>
+    <div class="loading" v-if="page.loading.value"><h3>加载更多中...</h3></div>
 </template>
 
 <style scoped>
@@ -124,5 +125,10 @@
 
     .favorite {
         color: orange;
+    }
+
+    .loading {
+        text-align: center;
+        color: var(--font-color-2);
     }
 </style>
