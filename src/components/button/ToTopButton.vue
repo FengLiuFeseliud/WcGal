@@ -52,9 +52,8 @@
         padding: 1rem;
         font-size: 2rem;
 
-        border-radius: 1.5rem;
         color: var(--font-color);
-        border: 0.3rem solid var(--font-color);
+        border: 0.2rem solid var(--font-color);
         background-color: var(--div-background-color);
         transition: all 0.2s;
     }
@@ -75,7 +74,6 @@
         color: var(--font-color);
         border: 0.2rem solid var(--font-color);
         background-color: var(--div-background-color);
-        border-radius: 1rem;
         transition: all 0.2s;
     }
 

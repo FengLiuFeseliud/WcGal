@@ -71,7 +71,6 @@
         word-wrap: normal;
         
         font-size: 1rem;
-        border-radius: 1rem;
         background-color: var(--input-color);
         box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color);
         z-index: 2;

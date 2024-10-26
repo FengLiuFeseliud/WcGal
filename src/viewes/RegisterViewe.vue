@@ -15,8 +15,8 @@
     const code = ref<string>("")
 
     async function register(){
-        const data = await UserRequest.register(userName.value, email.value, password.value, code.value)
-        if(data == null){
+        if(!(await UserRequest.register(userName.value, email.value, password.value, code.value))){
+            Log.error("注册失败... qwq")
             return
         }
         
@@ -53,7 +53,6 @@
         height: 15.3rem;
         z-index: 1;
 
-        border-radius: 1rem;
         background-color: var(--cover-page-background-color);
     }
     

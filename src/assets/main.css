@@ -61,17 +61,17 @@ html {
 /** 亮色主题 */
 [data-themes='default'] {
     /** */
-    --app-background-color: rgba(255, 255, 255, 0.5);
+    --app-background-color: rgba(255, 255, 255, 0);
     /** 盒子颜色 */
     --div-background-color: #fff;
      /** 盒子颜色 */
-     --div-background-color-shallow: aliceblue;
+    --div-background-color-shallow: aliceblue;
     /** 深色盒子颜色 */
     --div-background-color-deep: rgb(135, 206, 235);
     /** 深色盒子颜色 */
     --div-background-color-deep: rgb(135, 206, 235);
     /** 半透明盒子颜色 */
-    --cover-page-background-color: rgba(234, 234, 234, 0.5);
+    --cover-page-background-color: rgba(255, 255, 255, 0.5);
     /** 深色半透明盒子颜色 */
     --cover-page-background-color-deep: rgba(135, 206, 235, 0.5);
     /** 字体颜色 */

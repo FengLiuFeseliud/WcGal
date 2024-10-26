@@ -3,12 +3,10 @@
     import EmailInput from '@/components/input/EmailInput.vue';
     import PasswordInput from '@/components/input/PasswordInput.vue';
     import { UserRequest } from '@/request/UserRequest';
-    import { useUserStore } from '@/stores/UserStore';
     import { ref } from 'vue';
     import { router } from '@/router'
     import { Log } from '@/stores/LogStore';
 
-    const useStore = useUserStore()
     const email = ref<string>("")
     const password = ref<string>("")
 
@@ -28,8 +26,8 @@
             return
         }
 
-        await UserRequest.login(email.value, password.value)
-        if(useStore.token == null || useStore.token == ""){
+        if(!(await UserRequest.login(email.value, password.value))){
+            Log.error("登录失败... qwq")
             return
         }
 
@@ -55,6 +53,10 @@
 </template>
 
 <style scoped>
+    :deep(.cover){
+        background-color: var(--cover-page-background-color);
+    }
+
     .login-box {
         padding: 1rem 1.5rem;
         display: flex;
@@ -65,7 +67,6 @@
         height: 11rem;
         z-index: 1;
 
-        border-radius: 1rem;
         background-color: var(--cover-page-background-color);
     }
 

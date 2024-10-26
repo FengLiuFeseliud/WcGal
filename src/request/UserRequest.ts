@@ -1,6 +1,7 @@
 import { Log } from "@/stores/LogStore";
 import { useUserStore } from "@/stores/UserStore";
 import { AxiosUilt, type Response } from "@/utils/AxiosUtils";
+import type { Favorite } from "./FavoriteRequset";
 
 interface UserInfo {
     userId: number
@@ -11,6 +12,7 @@ interface UserInfo {
 
 interface User extends UserInfo {
     email: string
+    favorites: Favorite[]
     createTime: string
     updateTime: string
     token: string

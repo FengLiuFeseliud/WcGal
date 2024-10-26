@@ -14,7 +14,7 @@
     
     <div class="home">
         <Suspense>
-            <ArticleListBox v-model:model-value="page" />
+            <ArticleListBox v-model:page="page"/>
         </Suspense>
     </div>
 </template>

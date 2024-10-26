@@ -6,7 +6,7 @@ import { ref, type Ref } from "vue"
 class Page<T> {
     public pageIn: Ref<number> = ref(0)
     private pages: number = 0
-    private count: number = 0
+    public count: Ref<number> = ref(0)
     private limit: number
     private getData: (page: number, limit: number) => Promise<PageResponse<T[]> | null>
     private map: Map<number, T[]> = new Map()
@@ -31,7 +31,7 @@ class Page<T> {
             return null
         }
 
-        this.count = data.count
+        this.count.value = data.count
         this.pages = data.pages
         return data.data
     }
@@ -122,10 +122,6 @@ class Page<T> {
 
     public getPages(): number {
         return this.pages
-    }
-
-    public getCount(): number{
-        return this.count
     }
 }
 

@@ -83,13 +83,9 @@
 
 <style scoped>
     .cover {
-        display: flex;
         position: fixed;
-        width: 100vw;
-        height: 100vh;
         flex-direction: column;
         justify-content: center;
-        z-index: 2;
         
         background-color: var(--cover-page-background-color-deep);
     }

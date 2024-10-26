@@ -38,7 +38,7 @@
 <template>
     <div class="comment-area-box">
         <div class="comment-input-box">
-            <span class="comment-name iconfont icon-message-comments"> 评论<span>&nbsp;{{ page.getCount() }}</span></span>
+            <span class="comment-name iconfont icon-message-comments"> 评论<span>&nbsp;{{ page.count.value }}</span></span>
             <div class="comment-sort-set">
                 <RadioBox :name="'sort'" :checked="0" :radio-types="[SortType.Likes, SortType.Desc, SortType.Asc]" v-model:model-value="sortType" />
             </div>

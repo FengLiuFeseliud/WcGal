@@ -69,7 +69,6 @@
         background-color: var(--div-background-color);
         padding: 1rem;
 
-        border-radius: 1rem;
         box-shadow: 0.4rem 0.4rem 1rem var(--shadow-color);
     }
 

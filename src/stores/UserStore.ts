@@ -40,8 +40,12 @@ const useUserStore = defineStore("userStore", () => {
         return !userId.value
     }
 
+    function isMy(uesrId: number){
+        return userId.value === uesrId
+    }
+
     function isMyOrAdmin(uesrId: number){
-        return (isLogin() && userId.value === uesrId) || admin.value
+        return (isLogin() && isMy(uesrId)) || admin.value
     }
 
     return {
@@ -55,6 +59,7 @@ const useUserStore = defineStore("userStore", () => {
         loginOut,
         isLogin,
         notLogin,
+        isMy,
         isMyOrAdmin
     }
 })

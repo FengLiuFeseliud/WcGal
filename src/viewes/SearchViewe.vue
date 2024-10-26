@@ -14,8 +14,8 @@
     const page = new Page(10, async (page, limit) => {
         return await ArticleRequest.getArticles(page, limit, useStore.desc, keyword.value)
     })
-    await page.resetList()
 
+    await onSearch(useStore.search)
     async function onSearch(searcKeyword: string){
         keyword.value = searcKeyword + " "
         useStore.checkedTags.forEach(tag => {
@@ -51,19 +51,19 @@
     <div class="search-article-box">
         <div class="search-data">
             <SearchBar v-model:model-value="useStore.desc" @keyword="onSearch" />
-            <h2 v-if="keyword !== ''">搜索: <span>{{ keyword }}</span></h2> 
+            <h3 v-if="keyword?.trim().length">搜索: <span>{{ keyword }}</span></h3> 
             <div v-if="useStore.checkedTags.length">
-                <h2>选中标签</h2>
+                <h3>选中标签</h3>
                 <CheckedTagBar v-model:modelValue="useStore.checkedTags"></CheckedTagBar>
             </div>
-            <h2>共 <span>{{ page.getCount() }}</span> 条结果</h2>
+            <h3>共 <span>{{ page.count.value }}</span> 条结果</h3>
             <div class="not-article" v-if="!page.list.value.length">
                 <h1>没有搜索到文章...</h1>
                 <img src="../assets/not-article.jpg" loading="lazy" />
             </div>
         </div>
 
-        <ArticleListBox v-model:modelValue="page"></ArticleListBox>
+        <ArticleListBox v-model:page="page"></ArticleListBox>
     </div>
 </template>
 
@@ -83,9 +83,20 @@
         text-align: center;
     }
 
+    .search-bar {
+        box-shadow: 0.2rem 0.2rem 0.4rem var(--shadow-color);
+    }
+
     .search-data {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
         width: 60%;
+        gap: 0.2rem;
+
         color: var(--font-color-2);
+        box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color-deep);
+        background-color: var(--div-background-color);
     }
 
     .search-data > .search-bar {
@@ -107,11 +118,11 @@
         font-size: 1.6rem;
     }
 
-    .search-data h2 {
+    .search-data h3 {
         margin-bottom: 0.3rem;
     }
 
-    .search-data h2 > span {
+    .search-data h3 > span {
         color: var(--font-color);
     }
 </style>

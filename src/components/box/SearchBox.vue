@@ -47,9 +47,9 @@
     .cover {
         position: fixed;
         z-index: 3;
-
         align-items: center;
-        background-color: var(--cover-page-background-color-deep);
+
+        background-color: var(--cover-page-background-color);
     }
 
     .tag-side-bar {
@@ -65,12 +65,13 @@
         width: 30vw;
         padding: 1rem;
         
-        background-color: var(--cover-page-background-color);
-        border-radius: 1rem;
+        background-color: var(--div-background-color);
+        box-shadow: 0.5rem 0.5rem 0.7rem var(--shadow-color);
     }
 
     .search-bar {
         width: 30vw;
+        box-shadow: 0.5rem 0.5rem 0.7rem var(--shadow-color);
     }
 
     .search-bar :deep(label) {

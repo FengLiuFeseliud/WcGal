@@ -1,6 +1,7 @@
 import { useArticleStore } from "@/stores/ArticleStore";
 import { AxiosUilt, type PageResponse, type Response } from "@/utils/AxiosUtils";
 import type { UserInfo } from "./UserRequest";
+import type { FavoriteItem } from "./FavoriteRequset"
 
 interface Tag{
     tagId: number
@@ -34,6 +35,7 @@ interface Article{
     likes: number
     favorites: number
     comments: number
+    favoriteItems: FavoriteItem[]
 }
 
 
