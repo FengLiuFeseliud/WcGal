@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "7213079",
+      "name": "Ok",
+      "font_class": "Ok",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "26535223",
+      "name": "X",
+      "font_class": "X",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "14465094",
+      "name": "folder-create",
+      "font_class": "folder-create",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
       "icon_id": "34453072",
       "name": "up",
       "font_class": "up",

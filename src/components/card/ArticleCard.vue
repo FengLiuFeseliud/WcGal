@@ -4,6 +4,7 @@
     import { getSmallTime } from '@/utils/TextUtils';
     import { FileRequest } from '@/request/FileRequest';
     import { useArticleStore } from '@/stores/ArticleStore';
+    import TagBar from '../bar/TagBar.vue';
 
     const useStore = useArticleStore()
     const { article, showUser = true } = defineProps<{article: Article, showUser?: boolean}>()
@@ -39,12 +40,6 @@
 </template>
 
 <style scoped>
-    :deep(.waterfall-item) {
-        background-color: var(--div-background-color);
-        box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color-deep);
-        z-index: 2;
-    }
-
     .article-info {
         display: flex;
         flex-direction: column;

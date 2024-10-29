@@ -1,33 +1,20 @@
 <script lang="ts" setup>
+    import IimitInput from './IimitInput.vue';
+
     const [ userName ] = defineModel<string>()
 </script>
 
 <template>
-    <label class="name-input">
-        <i class="iconfont icon-nickname_default"></i>
-        <input type="text" v-model="userName" placeholder="用户名" />
-    </label>
+    <IimitInput v-model:model-value="userName" :placeholder="'用户名'" 
+        @canInput="(text, canInput) => canInput.value = text.length >= 2 && text.length <= 30">
+        <slot><i class="iconfont icon-nickname_default"></i></slot>
+
+        <template #error-msg>
+            <span>用户名不能小于 2 位或大于 30 位...</span>
+        </template>
+    </IimitInput>
 </template>
 
 <style scoped>
-    .name-input {
-        display: flex;
-    }
 
-    input {
-        padding: 0.5rem;
-        flex: 1;
-        
-        border: none;
-        font-size: 1rem;
-        background-color: var(--input-color);
-    }
-
-    .name-input i {
-        width: 9%;
-        line-height: 2.2rem;
-        
-        text-align: center;
-        font-size: 1.5rem;
-    }
 </style>

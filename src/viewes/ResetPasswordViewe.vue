@@ -7,12 +7,29 @@
     import { UserRequest } from '@/request/UserRequest';
     import { router } from '@/router';
     import { Log } from '@/stores/LogStore';
+    import ImgAndFormBox from '@/components/box/ImgAndFormBox.vue';
 
     const password = ref<string>("")
     const email = ref<string>("")
     const code = ref<string>("")
 
     async function resetPassword(){
+        if(email.value == ""){
+            Log.error("邮箱不填是留给我填么？")
+            return
+        }
+
+        if(password.value == ""){
+            Log.error("密码不填是留给我填么？")
+            return
+        }
+
+        if(code.value == ""){
+            Log.error("验证码不填是留给我填么？")
+            return
+        }
+
+
         const bool = await UserRequest.resetPassword(email.value, password.value, code.value);
         if(!bool){
             return
@@ -25,8 +42,8 @@
 
 <template>
     <CoverBox :show="true">
-        <div class="register-box">
-            <h2>更改密码 ~</h2>
+        <ImgAndFormBox>
+            <h2>更改密码</h2>
             <EmailInput v-model:model-value="email"></EmailInput>
             <EmailCodeInput :email="email" v-model:model-value="code"></EmailCodeInput>
             <PasswordInput v-model:model-value="password"></PasswordInput>
@@ -35,7 +52,7 @@
                 <router-link to="/">返回</router-link>
                 <a @click="resetPassword">更改密码</a>
             </div>
-        </div>
+        </ImgAndFormBox>
     </CoverBox>
 </template>
 
@@ -70,7 +87,13 @@
         width: 40%;
 
         line-height: 2rem;
-        color: var(--deep-button-font-color);
+        color: var(--font-color-2);
         background-color: var(--cover-page-background-color-deep);
+        transition: all 0.2s;
     }
+
+    .tools > *:hover {
+        color: var(--link-hover-font-color);
+    }
+
 </style>

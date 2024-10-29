@@ -7,7 +7,7 @@ const useUserStore = defineStore("userStore", () => {
     const userName = ref<string>()
     const head = ref<string>()
     const admin = ref<boolean>()
-    const token = ref<string>(localStorage.getItem("token")+"")
+    const token = ref<string | null>(localStorage.getItem("token"))
     const email = ref<string>()
 
     function setUser(user: User){

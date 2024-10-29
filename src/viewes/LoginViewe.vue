@@ -6,6 +6,7 @@
     import { ref } from 'vue';
     import { router } from '@/router'
     import { Log } from '@/stores/LogStore';
+    import ImgAndFormBox from '@/components/box/ImgAndFormBox.vue';
 
     const email = ref<string>("")
     const password = ref<string>("")
@@ -13,11 +14,6 @@
     async function login(){
         if(email.value == ""){
             Log.error("邮箱不填是留给我填么？")
-            return
-        }
-
-        if(email.value.startsWith("@") || email.value.indexOf("@") == -1){
-            Log.error("啊? 这是邮箱么？")
             return
         }
 
@@ -38,8 +34,8 @@
 
 <template>
     <CoverBox :show="true">
-        <div class="login-box">
-            <h2>登录 ~</h2>
+        <ImgAndFormBox>
+            <h2>登录</h2>
             <EmailInput v-model:model-value="email"></EmailInput>
             <PasswordInput v-model:model-value="password"></PasswordInput>
 
@@ -48,25 +44,12 @@
                 <a @click="login">登录</a>
             </div>
             <router-link class="new-password" to="/password"><i class="iconfont icon-wangjimima"></i>忘记密码?</router-link>
-        </div>
+        </ImgAndFormBox>
     </CoverBox>
 </template>
 
 <style scoped>
     :deep(.cover){
-        background-color: var(--cover-page-background-color);
-    }
-
-    .login-box {
-        padding: 1rem 1.5rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        margin: auto;
-        width: 25rem;
-        height: 11rem;
-        z-index: 1;
-
         background-color: var(--cover-page-background-color);
     }
 
@@ -86,20 +69,30 @@
         width: 40%;
 
         line-height: 2rem;
-        color: var(--deep-button-font-color);
+        color: var(--font-color-2);
         background-color: var(--cover-page-background-color-deep);
+        transition: all 0.2s;
+    }
+
+    .tools > *:hover {
+        color: var(--link-hover-font-color);
     }
 
 
     .new-password > i {
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
     .new-password {
-        font-size: 0.8rem;
+        font-size: 1rem;
         line-height: 0.8rem;
 
         color: var(--font-color-2);
         text-align: end;
+        transition: all 0.2s;
+    }
+
+    .new-password:hover {
+        color: var(--link-hover-font-color);
     }
 </style>

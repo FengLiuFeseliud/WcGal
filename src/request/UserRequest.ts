@@ -21,14 +21,15 @@ interface User extends UserInfo {
 class UserRequest {
 
     public static async info(): Promise<void>{
-        if(useUserStore().token == "null"){
+        if(useUserStore().token == null){
             return
         }
-
-        const data = (<Response<User>><unknown>((await AxiosUilt.create().instance.post("/user/info")).data))
-        if(data.code === 401 && useUserStore().isLogin()){
+        
+        const data = (<Response<User>><unknown>(await AxiosUilt.create().post("/user/info")))
+        if(data.code === 401 && useUserStore().token !== null){
             Log.error("登录过期！！！")
             useUserStore().loginOut()
+            return
         }
         
         if(data.code !== 200 && data.code !== 401){

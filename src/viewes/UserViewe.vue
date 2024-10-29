@@ -54,8 +54,8 @@
 </script>
 
 <template>
-    <div class="user-box" v-if="user !== undefined">
-        <div class="user-info">
+    <div class="user-box">
+        <div class="user-info" v-if="user !== undefined">
             <img :src="FileRequest.img(user.head + '?scale=0.5')">
             <div class="user-data">
                 <h1>{{ user.userName }}</h1>
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div class="user-data-list">
+        <div class="user-data-list" v-if="user !== undefined">
             <div class="user-data-list-title">
                 <h2>{{ user.userName }} 的收藏夹</h2>
                 <button v-if="user.favorites.length > 6"  @click="showAllFavorite = !showAllFavorite">展开显示 <span>{{ user.favorites.length }} 个收藏夹</span>
@@ -85,7 +85,7 @@
             </Waterfall>
         </div>
 
-        <div class="user-data-list">
+        <div class="user-data-list" v-if="user !== undefined">
             <div class="user-data-list-title">
                 <h2>{{ user.userName }} 的文章</h2>
                 <button @click="showAllArticle = !showAllArticle" v-if="page !== undefined">展开显示 <span>{{ page.count.value }} 个文章</span>
@@ -102,7 +102,6 @@
     .user-box {
         display: flex;
         flex-direction: column;
-        min-height: 80vh;
         width: 60vw;
         margin: 0 auto;
         padding: 10vh 0;
@@ -166,7 +165,7 @@
         max-height: 90vh;
         overflow-y: hidden;
 
-        mask: linear-gradient(#000 85%, transparent);
+        mask: linear-gradient(#000 60%, transparent);
     }
 
     h1 {

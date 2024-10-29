@@ -87,7 +87,7 @@
         flex-direction: column;
         justify-content: center;
         
-        background-color: var(--cover-page-background-color-deep);
+        background-color: var(--cover-page-background-color);
     }
 
     .box {

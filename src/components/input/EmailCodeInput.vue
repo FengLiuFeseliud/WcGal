@@ -1,13 +1,30 @@
 <script lang="ts" setup>
     import { UserRequest } from '@/request/UserRequest';
-import { Log } from '@/stores/LogStore';
+    import { Log } from '@/stores/LogStore';
     import { ref } from 'vue';
+    import CanInputBox from '../box/CanInputBox.vue';
 
+    const canInput = ref<boolean>()
     const { email } = defineProps<{email: string}>()
-    const [ code ] = defineModel<string>()
+    const [ code ] = defineModel<string>({
+        default: "",
+        set(code) {
+            canInput.value = code.length >= 6
+            return canInput.value ? code.slice(0, 6) : code
+        }
+    })
+
     const sendCodeCdStr = ref<string>()
     var canSendCode = true;
     var sendCodeCd = 60
+
+    function getDispalyCode(code: string){
+        let str = code
+        for(let index = 0; index <  6 - code.length; index++){
+            str += "_"
+        }
+        return str
+    }
 
     function sendCd(){
         setTimeout(() =>  {
@@ -44,57 +61,56 @@ import { Log } from '@/stores/LogStore';
 </script>
 
 <template>
-    <label class="email-code-input">
+    <CanInputBox v-model:model-value="canInput" class="email-code-input">
         <i class="iconfont icon-code"></i>
-        <input type="text" v-model="code" placeholder="邮箱验证码" />
-        <button class="send-email-code" @click="sendCode">
-            <i class="iconfont icon-send-email">
-                <span class="send-code-cd">{{ sendCodeCdStr }}</span>
-            </i>
-        </button>
-    </label>
+        <input v-model="code" type="text">
+        <div class="code">
+            <span v-for="str in getDispalyCode(code)" :key="str">{{ str }}</span>
+        </div>
+
+        <template #end>
+            <button class="send-email-code" @click="sendCode">
+                <i class="iconfont icon-send-email">
+                    <span class="send-code-cd">{{ sendCodeCdStr }}</span>
+                </i>
+            </button>
+        </template>
+
+        <template #error-msg>
+            <span>邮箱验证码是 6 位啦...</span>
+        </template>
+    </CanInputBox>
 </template>
 
 <style scoped>
-    .email-code-input {
-        display: flex;
-    }
-
-    .email-code-input > span {
-        padding: 0 0.5rem;
-        line-height: 2rem;
-    }
-
     input {
         padding: 0.5rem;
+        position: absolute;
+        opacity: 0;
+        z-index: 2;
+    }
+
+    .code {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
         flex: 1;
+    }
 
-        border: none;
-        font-size: 1rem;
-
+    .code > span {
+        padding: 0.5rem  0.9rem;
+        color: var(--input-focus-font-color);
         background-color: var(--input-color);
     }
 
-    .email-code-input i {
-        width: 9%;
-        line-height: 2.2rem;
-        
-        text-align: center;
-        font-size: 1.5rem;
-    }
-
     .send-email-code {
-        padding: 0 0.5rem;
-    }
-
-    .email-code-input > .send-email-code {
-        width: fit-content;
-        min-width: 9%;
-
-        background-color: var(--button-font-color);
+        padding: 0 0.25rem;
+        color: var(--font-color-2);
+        background-color: var(--input-color);
     }
 
     .send-code-cd {
         font-size: 0.8rem;
+        color: var(--font-color);
     }
 </style>

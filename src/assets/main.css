@@ -9,11 +9,6 @@
     user-select:none;
 }
 
-/** 删除所有按钮的默认边框 */
-button {
-    border: none;
-}
-
 /** 删除所有输入框的默认边框  */
 input {
     border: none;
@@ -25,15 +20,22 @@ a {
     cursor: pointer;
 }
 
+/** 删除所有按钮的默认边框 */
 /** 设置默认手势 */
 button {
     cursor: pointer;
+    outline :none;
+    border: none;
 }
 
 /** 删除网站纵向滚动条 */
 html {
     scroll-behavior:smooth;
     overflow-x: hidden;
+}
+
+select {
+    border: none;
 }
 
 /** 背景图片 */

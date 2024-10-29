@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-    import { FavoriteRequset, type Favorite } from '@/request/FavoriteRequset';
+    import { FavoriteRequset, type Favorite, type FavoriteItem } from '@/request/FavoriteRequset';
     import { getSmallTime } from '@/utils/TextUtils';
     import { router } from '@/router';
     import { Log } from '@/stores/LogStore';
@@ -11,12 +11,7 @@
 
     const { favoriteId } = defineProps<{favoriteId: string}>()
     const favorite = ref<Favorite>()
-    const page = new Page(10, async (page, limit) => {
-        if(favorite.value == undefined){
-            return null
-        }
-        return await FavoriteRequset.getFavoriteItems(favorite.value.favoriteId, page, limit, false)
-    })
+    var page: Page<FavoriteItem> | undefined
     var preFavoriteId: number
 
     async function getFavorite(favoriteId: string) {
@@ -33,7 +28,7 @@
         Log.info("获取收藏夹中...")
         const response = await FavoriteRequset.getFavorite(id)
         if(response == null || response.data == null){
-            Log.info("获取收藏夹失败... qwq")
+            Log.error("获取收藏夹失败... qwq")
             setTimeout(() => {
                 router.back()
             }, 1000)
@@ -42,18 +37,31 @@
 
         favorite.value = response.data
         preFavoriteId = favorite.value.favoriteId
+
+        page = new Page(10, async (page, limit) => {
+            if(favorite.value == undefined){
+                return null
+            }
+            return await FavoriteRequset.getFavoriteItems(favorite.value.favoriteId, page, limit, false)
+        })
     }
 
     onActivated(async () => {
         await getFavorite(favoriteId)
-        page.startScroll.bind(page)()
+        if(page !== undefined){
+            page.startScroll.bind(page)()
+        }
     })
-    onDeactivated(page.endScroll.bind(page))
+    onDeactivated(() => {
+        if(page !== undefined){
+            page.endScroll.bind(page)()
+        }
+    })
 </script>
 
 <template>
-    <div class="favorite-box" v-if="favorite !== undefined">
-        <div class="favorite-info">
+    <div class="favorite-box">
+        <div class="favorite-info" v-if="favorite !== undefined">
             <img :src="FileRequest.img(favorite.cover + '?scale=0.3')">
             <div class="favorite-data">
                 <h1>{{ favorite.favoriteName }}</h1>
@@ -62,7 +70,8 @@
                 <span>{{ getSmallTime(favorite.createTime) }}</span>
             </div>
         </div>
-        <Waterfall :list="page.list.value" @afterRender="page.loading.value = false" :width="350" :gutter="20" :crossOrigin="false" backgroundColor="null">
+        <Waterfall v-if="page !== undefined && page.list.value.length !== 0" :list="page.list.value" 
+            @afterRender="page.loading.value = false" :width="350" :gutter="20" :crossOrigin="false" backgroundColor="null">
             <template #default="{ item }">
                 <ArticleCard :article="item.article"></ArticleCard>
             </template>
@@ -75,8 +84,6 @@
         display: flex;
         flex-direction: column;
         width: 60vw;
-        min-height: 80vh;
-        height: fit-content;
         margin: 0 auto;
         padding: 10vh 0;
         gap: 5vh;

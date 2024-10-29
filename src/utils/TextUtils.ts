@@ -24,8 +24,8 @@ function getSmallTime(tiem: string): string{
     const newDate = Math.floor(new Date().getTime() / 1000)
 
     const day = Math.floor((newDate - date) / (60 * 60 * 24))
-    if(day > 5){
-        return tiemDate.getFullYear() + "/" + (tiemDate.getMonth() + 1) + "/" + tiemDate.getDay()
+    if(day > 7){
+        return tiemDate.getFullYear() + "/" + (tiemDate.getMonth() + 1) + "/" + tiemDate.getDate()
     }
 
     if(day >= 1){

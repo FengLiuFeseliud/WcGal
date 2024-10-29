@@ -30,6 +30,7 @@
         z-index: 10;
 
         font-size: 1vw;
+        background-color: var(--cover-page-background-color);
     }
 
     #top-left {

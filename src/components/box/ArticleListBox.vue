@@ -28,6 +28,12 @@
 </template>
 
 <style scoped>
+    :deep(.waterfall-item) {
+        background-color: var(--div-background-color);
+        box-shadow: 0.4rem 0.4rem 0.6rem var(--shadow-color-deep);
+        z-index: 2;
+    }
+
     .loading {
         text-align: center;
         color: var(--font-color-2);

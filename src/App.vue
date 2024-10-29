@@ -9,8 +9,8 @@
 
 <template>
     <SnowFlake v-bind:model-value="100"></SnowFlake>
-    <TopBar/>
-    
+    <TopBar />
+
     <div id="top"></div>
     <div class="page">
         <Suspense>
@@ -36,6 +36,7 @@
 <style scoped>
     .page {
         width: 100vw;
+        min-height: 100vh;
         height: fit-content;
     }
 </style>
