@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeViewe from "@/viewes/HomeViewe.vue";
 import SearchViewe from "@/viewes/SearchViewe.vue";
+import { AdminRequest } from "./request/AdminRequest";
+import { Log } from "./stores/LogStore";
 
 
 const router = createRouter({
-     history: createWebHistory(),
-     routes: [
+    history: createWebHistory(),
+    routes: [
         {
             path: "/",
             name: 'home',
@@ -78,10 +80,32 @@ const router = createRouter({
         },
 
         {
+            path: "/admin",
+            name: "admin",
+            component: () => import('@/viewes/AdminViewe.vue'),
+            beforeEnter: async () =>  {
+                const  data = await AdminRequest.adminInit();
+                if(data.code != 200){
+                    Log.error("你没有权限...")
+                    return false
+                }
+
+                if(data.data){
+                    Log.info("init admin user")
+                    router.push({name: "login"})
+                    return false
+                }
+
+                window.scrollTo({top: 0, behavior: "smooth"})
+                return true
+            }
+        },
+
+        {
             path: "/:pathMatch(.*)",
             component: HomeViewe,
         }
-     ]
+    ]
 })
 
 

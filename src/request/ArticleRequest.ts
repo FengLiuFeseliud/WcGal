@@ -14,8 +14,9 @@ class TagData implements Tag {
     tagName: string
     tagCount: number
 
-    constructor(tagName: string){
-        this.tagId = 0
+     constructor(tagName: string){
+        this.tagId = 0 
+
         this.tagName = tagName
         this.tagCount = 0
     }
